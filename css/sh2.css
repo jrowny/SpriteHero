@@ -6,10 +6,20 @@ html, body, #layout-container {
 
 .navbar{margin-bottom:0;}
 
-#settingsArea{overflow:hidden;}
+#settingsArea{
+  overflow:hidden;
+}
 
-#sprite-container{position:relative;overflow:auto;}
-#sprite{top:0;left:0;position:absolute;z-index:-10;}
+#sprite-container{
+    position:relative;
+    overflow:auto;
+}
+#sprite{
+    top:0;
+    left:0;
+    position:absolute;
+    z-index:-10;}
+
 #grid{z-index:10;}
 
 .sprite_box{
@@ -18,3 +28,8 @@ html, body, #layout-container {
   position : absolute;
   z-index : 999;
 }  
+
+.selected{
+  background: #0000FF;
+  opacity : 0.5;
+}

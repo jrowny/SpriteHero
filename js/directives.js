@@ -1,3 +1,40 @@
+app.directive('sprite', function(settings, sprites){
+  var link = function(scope, element, attrs, model) {
+    element.mousedown(function(){
+      $('.selected').removeClass("selected");
+      $(this).addClass("selected");
+      sprites.current = model.$viewValue;
+    });
+    //update model position on drag
+    var onDrag = function(event, ui){
+      var sprite = model.$viewValue;
+      sprite.x = Math.round(ui.position.left/settings.scale);
+      sprite.y = Math.round(ui.position.top/settings.scale);
+      scope.$apply();
+    };
+    //update model position and size on resize
+    var onResize = function(event, ui){
+      var sprite = model.$viewValue;
+      sprite.width = Math.round(ui.size.width/settings.scale);
+      sprite.height = Math.round(ui.size.height/settings.scale);
+      sprite.x = Math.round(ui.position.left/settings.scale);
+      sprite.y = Math.round(ui.position.top/settings.scale);
+      scope.$apply();
+    };
+    if(settings.gridEnabled){
+      element.draggable({ drag: onDrag, grid: [settings.grid, settings.grid] })
+             .resizable({ resize: onResize, grid: [settings.grid, settings.grid], handles: "n, w, s, e" });
+    }else{
+      element.draggable({drag: onDrag}).resizable({resize: onResize,  handles: "n, w, s, e"});
+    }
+  };
+  return {
+    restrict : 'A',
+    require: 'ngModel',
+    link : link
+  };
+});
+
 app.directive('generator', function(settings, sprites){
   var i = 0,
       y_end = 0,
@@ -6,57 +43,51 @@ app.directive('generator', function(settings, sprites){
       y_begin = 0,
       drag_left = false;
   var link = function(scope, element, attrs) {
-    element.selectable({ 
-    start: function(e) {
-            var offset = $(this).offset();
-            //get the mouse position on start
-            x_begin = e.pageX - offset.left,
-            y_begin = e.pageY - offset.top;
-          },
-    stop: function(e) {
-            //get the mouse position on stop
-            var offset = $(this).offset(),
-                width = 0,
-                height = 0,
-                sprite;
-            x_end = e.pageX - offset.left,
-            y_end = e.pageY - offset.top;
-            /***  if dragging mouse to the right direction, calcuate width/height  ***/
-            if( x_end - x_begin >= 1 ) {
-                width  = x_end - x_begin,
-                height = y_end - y_begin;            
-            /***  if dragging mouse to the left direction, calcuate width/height (only change is x) ***/            
-            } else {                
-                width  = x_begin - x_end,
-                height =  y_end - y_begin;
-                drag_left = true;
-            }   
-            //if the mouse was dragged left, offset the gen_box position 
-            //if(drag_left) spriteBox.offset({ left: x_end + offset.left});
-            var spriteBox;
-            if(settings.gridEnabled){
-               //adjust box to fit grid
-              x_begin -= x_begin % settings.grid;
-              y_begin -= y_begin % settings.grid;
-              width -= width % settings.grid;
-              height -= height % settings.grid;
-            }
+    element.selectable({
+      start: function(e) {
+              var offset = $(this).offset();
+              //get the mouse position on start
+              x_begin = e.pageX - offset.left,
+              y_begin = e.pageY - offset.top;
+            },
+      stop: function(e) {
+              //get the mouse position on stop
+              var offset = $(this).offset(),
+                  width = 0,
+                  height = 0,
+                  sprite;
+              x_end = e.pageX - offset.left,
+              y_end = e.pageY - offset.top;
+              /***  if dragging mouse to the right direction, calcuate width/height  ***/
+              if( x_end - x_begin >= 1 ) {
+                  width  = x_end - x_begin,
+                  height = y_end - y_begin;
+              /***  if dragging mouse to the left direction, calcuate width/height (only change is x) ***/
+              } else {
+                  width  = x_begin - x_end,
+                  height =  y_end - y_begin;
+                  drag_left = true;
+              }
+              //if the mouse was dragged left, offset the gen_box position
+              //TODO: account for drag left
+              //if(drag_left) spriteBox.offset({ left: x_end + offset.left});
+              if(settings.gridEnabled){
+                 //adjust box to fit grid
+                x_begin -= x_begin % settings.grid;
+                y_begin -= y_begin % settings.grid;
+                width -= width % settings.grid;
+                height -= height % settings.grid;
+              }
 
-            sprite = new Sprite(x_begin, y_begin, width, height, i);
-            element.append(sprite.getBox());
-            spriteBox = $('#sprite_box_' + sprite.id);
-            sprites.push(sprite);
-            if(settings.gridEnabled){
-              spriteBox.draggable({ grid: [settings.grid, settings.grid] })
-                       .resizable({ grid: [settings.grid, settings.grid] });
-            }else{              
-              spriteBox.draggable().resizable();
+              sprite = new Sprite(x_begin, y_begin, width, height, i);
+
+              if(width > 0 && height >0){
+                sprites.data.push(sprite);
+                i++;
+                scope.$apply();
+              }
             }
-            
-            i++;
-            scope.$apply();
-          }
-    });
+      });
   };
   return {
     restrict : 'A',
@@ -64,7 +95,7 @@ app.directive('generator', function(settings, sprites){
   };
 });
 
-app.directive('sprite', function(settings){
+app.directive('imageSource', function(settings){
   var link = function(scope, element, attrs) {
     var render = function() {
       element.attr('src', settings.image);
@@ -90,7 +121,6 @@ app.directive('sprite', function(settings){
       element.css('min-height',settings.height*settings.scale);
     };
 
-    //key point here to watch for changes of the type property
     scope.$watch('settings.image', function(newValue, oldValue) {
       render();
     });
@@ -167,7 +197,7 @@ app.directive('layout', function(){
   };
 });
 
-
+//TODO: switch to the angular UI version
 app.directive('modal', ['$timeout', function($timeout) {
   return {
     restrict: 'A',

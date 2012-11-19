@@ -6,13 +6,13 @@ app.factory('settings', function(){
     width       : 0,
     height      : 0,
     scale       : 1,
-    gridEnabled : true,
+    gridEnabled : false,
     gridOpacity : 0.2
   };
   return settingsInstance;
 });
 
 //just an array
-app.factory('sprites', function(){
-  return [];
+app.service('sprites', function(){
+  this.data = [];
 });

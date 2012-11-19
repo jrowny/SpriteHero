@@ -1,1 +1,1 @@
-var app = angular.module('sh2',[]);
+var app = angular.module('sh2', ['ui']);

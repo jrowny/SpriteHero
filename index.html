@@ -13,7 +13,11 @@
     <link rel="stylesheet" type="text/css" href="css/sh2.css">
   </head>
 
-  <body ng-controller="AppCtrl">
+  <body ng-controller="AppCtrl" ui-keydown="{46 : 'trash()', 
+                                             37 : 'left()', 
+                                             38 : 'up()', 
+                                             39 : 'right()', 
+                                             40 : 'down()'}" >
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
@@ -39,12 +43,23 @@
     <div id="layout-container" layout>
       <div id="imageArea"  ng-controller="ImageAreaCtrl" class="pane ui-layout-center">
         <div id="sprite-container" generator>
-          <img sprite id="sprite"/>
+          <img image-source id="sprite"/>
           <canvas grid id="grid"></canvas>
+
+          
+          <div ng-repeat="sprite in sprites.data" 
+               ng-model="sprite"
+               sprite
+               class="sprite_box" 
+               style="width: {{sprite.width * settings.scale}}px; 
+                      height: {{sprite.height * settings.scale}}px;
+                      top: {{sprite.y * settings.scale}}px;
+                      left: {{sprite.x * settings.scale}}px;">
+          </div>   
         </div>
       </div>
 
-      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
+      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl" n>
         <form>
         <fieldset>
           <legend>Settings</legend>
@@ -90,7 +105,7 @@
               <td>{{sprite.height}}</td>
               <td>{{sprite.x}}</td>
               <td>{{sprite.y}}</td>
-              <td><a href="#"><i class="icon-trash"></i></a></td>
+              <td><a href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
             </tr>
           </table>
       </div>
@@ -130,7 +145,9 @@
     <script src="lib/jquery-1.8.2.min.js"></script>
     <script src="lib/jquery-ui-1.9.1.custom.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
     <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui.min.js"></script>
     <script src="lib/jquery.layout-latest.min.js"></script>
     <!--app stuff-->
     <script src="js/sprite.js"></script>
