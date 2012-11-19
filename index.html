@@ -88,31 +88,49 @@
       </div>
 
       <div ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
-          <table class="table table-bordered">
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Width</th>
-              <th>Height</th>
-              <th>X</th>
-              <th>Y</th>
-              <th></th>
-            </tr>
-            <tr ng-repeat="sprite in sprites">
-              <td>{{sprite.name}}</td>
-              <td>{{sprite.getType()}}</td>
-              <td>{{sprite.width}}</td>
-              <td>{{sprite.height}}</td>
-              <td>{{sprite.x}}</td>
-              <td>{{sprite.y}}</td>
-              <td><a href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
-            </tr>
-          </table>
+        <ul class="nav nav-tabs">
+          <li class="active" ><a href="#data" data-toggle="tab">Sprite Data</a></li>
+          <li><a href="#css" data-toggle="tab">CSS Output</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="data">
+            <table class="table table-bordered">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>X</th>
+                <th>Y</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="sprite in sprites">
+                <td>{{sprite.name}}</td>
+                <td>{{sprite.getType()}}</td>
+                <td>{{sprite.width}}</td>
+                <td>{{sprite.height}}</td>
+                <td>{{sprite.x}}</td>
+                <td>{{sprite.y}}</td>
+                <td><a href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="tab-pane" id="css">
+              <pre class="code">
+<span ng-repeat="sprite in sprites">.{{sprite.name}}{
+  width:{{sprite.width}}px;
+  height:{{sprite.height}}px;
+  background-position: -{{sprite.x}}px -{{sprite.y}}px;
+}
+</span>
+              </pre>
+          </div>
+        </div>
       </div>
     </div> 
 
 <!-- modals -->
-<div class="modal" modal ng-model="openURLModal">
+<div class="modal" ui-modal ng-model="openURLModal">
   <div class="modal-header">
     <button type="button" class="close" ng-click="openURLModal=false" aria-hidden="true">&times;</button>
     <h3>Open Sprite URL</h3>
@@ -128,7 +146,7 @@
     <a href="#" class="btn btn-primary" ng-click="openURL()">Open</a>
   </div>
 </div>
-<div class="modal" modal ng-model="openHelpModal">
+<div class="modal" ui-modal ng-model="openHelpModal">
   <div class="modal-header">
     <button type="button" class="close" ng-click="openHelpModal=false" aria-hidden="true">&times;</button>
     <h3>Help</h3>

@@ -187,7 +187,7 @@ app.directive('layout', function(){
           minSize: 200
         },
         south: {
-          size: 200
+          size: 360
         }
     });
   };
@@ -196,21 +196,3 @@ app.directive('layout', function(){
     link : link
   };
 });
-
-//TODO: switch to the angular UI version
-app.directive('modal', ['$timeout', function($timeout) {
-  return {
-    restrict: 'A',
-    require: 'ngModel',
-    link: function(scope, elm, attrs, model) {
-      //helper so you don't have to type class="modal hide"
-      elm.addClass('modal hide');
-      elm.on( 'shown', function() {
-        elm.find( "[autofocus]" ).focus();
-      });
-      scope.$watch(attrs.ngModel, function(value) {
-        elm.modal(value && 'show' || 'hide');
-      });
-    }
-  };
-}]);
