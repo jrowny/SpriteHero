@@ -11,3 +11,8 @@ app.factory('settings', function(){
   };
   return settingsInstance;
 });
+
+//just an array
+app.factory('sprites', function(){
+  return [];
+});

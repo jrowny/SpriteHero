@@ -1,4 +1,4 @@
-app.directive('generator', function(settings){
+app.directive('generator', function(settings, sprites){
   var i = 0,
       y_end = 0,
       x_end = 0,
@@ -17,7 +17,8 @@ app.directive('generator', function(settings){
             //get the mouse position on stop
             var offset = $(this).offset(),
                 width = 0,
-                height = 0;
+                height = 0,
+                sprite;
             x_end = e.pageX - offset.left,
             y_end = e.pageY - offset.top;
             /***  if dragging mouse to the right direction, calcuate width/height  ***/
@@ -29,35 +30,31 @@ app.directive('generator', function(settings){
                 width  = x_begin - x_end,
                 height =  y_end - y_begin;
                 drag_left = true;
-            }    
-            //append a new div and increment the class and turn it into jquery selector
-            $(this).append('<div id="sprite_box_' + i + '" class="sprite_box"></div>');
-            var spriteBox =  $('#sprite_box_' + i).css({
-                 'width'     : width,
-                 'height'    : height,
-                 'left'      : x_begin,
-                 'top'       : y_begin
-            });
-            
+            }   
             //if the mouse was dragged left, offset the gen_box position 
-            if(drag_left) spriteBox.offset({ left: x_end + offset.left});
+            //if(drag_left) spriteBox.offset({ left: x_end + offset.left});
+            var spriteBox;
             if(settings.gridEnabled){
-              spriteBox.draggable({ grid: [settings.grid, settings.grid] }).resizable({ grid: [settings.grid, settings.grid] });
-              //adjust box to fit grid
+               //adjust box to fit grid
               x_begin -= x_begin % settings.grid;
               y_begin -= y_begin % settings.grid;
               width -= width % settings.grid;
               height -= height % settings.grid;
-              spriteBox.css({'left':x_begin,
-                             'top' : y_begin,
-                             'height' : height,
-                             'width' : width});
-            }else{
+            }
+
+            sprite = new Sprite(x_begin, y_begin, width, height, i);
+            element.append(sprite.getBox());
+            spriteBox = $('#sprite_box_' + sprite.id);
+            sprites.push(sprite);
+            if(settings.gridEnabled){
+              spriteBox.draggable({ grid: [settings.grid, settings.grid] })
+                       .resizable({ grid: [settings.grid, settings.grid] });
+            }else{              
               spriteBox.draggable().resizable();
             }
             
-            //add thr styles of generated div into .inner_col_one
             i++;
+            scope.$apply();
           }
     });
   };

@@ -72,8 +72,27 @@
       </form>
       </div>
 
-      <div id="previewArea" class="pane ui-layout-south">
-          
+      <div ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
+          <table class="table table-bordered">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Width</th>
+              <th>Height</th>
+              <th>X</th>
+              <th>Y</th>
+              <th></th>
+            </tr>
+            <tr ng-repeat="sprite in sprites">
+              <td>{{sprite.name}}</td>
+              <td>{{sprite.getType()}}</td>
+              <td>{{sprite.width}}</td>
+              <td>{{sprite.height}}</td>
+              <td>{{sprite.x}}</td>
+              <td>{{sprite.y}}</td>
+              <td><a href="#"><i class="icon-trash"></i></a></td>
+            </tr>
+          </table>
       </div>
     </div> 
 
@@ -114,6 +133,7 @@
     <script src="lib/angular.min.js"></script>
     <script src="lib/jquery.layout-latest.min.js"></script>
     <!--app stuff-->
+    <script src="js/sprite.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>

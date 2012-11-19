@@ -11,6 +11,10 @@ function ImageAreaCtrl($scope, settings) {
   $scope.settings = settings;
 }
 
+function DataCtrl($scope, sprites){
+  $scope.sprites = sprites;
+}
+
 function SettingsCtrl($scope, settings) {
   $scope.settings = settings;
   //grid opacity
