@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="sh2">
+  <head>
+    <meta charset="utf-8">
+    <title>SH2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/jquery-ui-1.9.1.custom.min.css" rel="stylesheet">
+    <link href="lib/layout-default-latest.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/sh2.css">
+  </head>
+
+  <body ng-controller="AppCtrl">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">SH2</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >File <b class="caret"></b></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a tabindex="-1" href="#" ng-click="openURLModal=true">Open Sprite URL</a></li>
+
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#">Export CSS</a></li>
+                    <li><a tabindex="-1" href="#">Export HTML</a></li>
+                  </ul>
+              </li>
+              <li><a href="#help" ng-click="openHelpModal=true">Help</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div id="layout-container" layout>
+      <div id="imageArea"  ng-controller="ImageAreaCtrl" class="pane ui-layout-center">
+        <div id="sprite-container" generator>
+          <img sprite id="sprite"/>
+          <canvas grid id="grid"></canvas>
+        </div>
+      </div>
+
+      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
+        <form>
+        <fieldset>
+          <legend>Settings</legend>
+          <dl>
+            <dt>Image</dt><dd><a href="{{settings.image}}" target="_blank">{{settings.image}}</a></dd>
+            <dt>Size</dt><dd>{{settings.width}}px by {{settings.height}}px</dd>
+          </dl>    
+          <label>Zoom:  {{settings.scale * 100}}%</label>
+          <div class="btn-group">
+            <button class="btn" ng-disabled="settings.scale == 1" ng-click="zoomOut()"><i class="icon-zoom-out"></i></button>
+            <button class="btn" ng-disabled="settings.scale > 6.5" ng-click="zoomIn()"><i class="icon-zoom-in"></i></button>
+            <button class="btn" ng-disabled="settings.scale > 6.5" ng-click="settings.scale = 1">Reset</button>
+          </div>       
+          <label class="checkbox"><input type="checkbox" ng-model="settings.gridEnabled"/> Use Grid</label>
+          <label for="numGrid">Grid Scale:</label>
+          <input type="number" id="numGrid" name="numGrid" ng-model="settings.grid" class="input-mini" ng-disabled="!settings.gridEnabled"/>
+          <label>Grid Visibility:</label>
+          <div class="btn-group">
+            <button class="btn" ng-click="gridOpacity(0.2)" ng-disabled="!settings.gridEnabled">Light</button>
+            <button class="btn" ng-click="gridOpacity(0.5)" ng-disabled="!settings.gridEnabled">Medium</button>
+            <button class="btn" ng-click="gridOpacity(1)" ng-disabled="!settings.gridEnabled">Dark</button>
+          </div> 
+          
+        </fieldset>
+      </form>
+      </div>
+
+      <div id="previewArea" class="pane ui-layout-south">
+          
+      </div>
+    </div> 
+
+<!-- modals -->
+<div class="modal" modal ng-model="openURLModal">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="openURLModal=false" aria-hidden="true">&times;</button>
+    <h3>Open Sprite URL</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-inline">
+      <label>Sprite:</label>
+      <input type="text" class="input-xlarge" ng-model="spriteURL" placeholder="http://"/>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" ng-click="openURLModal=false">Close</a>
+    <a href="#" class="btn btn-primary" ng-click="openURL()">Open</a>
+  </div>
+</div>
+<div class="modal" modal ng-model="openHelpModal">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="openHelpModal=false" aria-hidden="true">&times;</button>
+    <h3>Help</h3>
+  </div>
+  <div class="modal-body">
+    Look at source code and add missing features.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" ng-click="openHelpModal=false">Close</a>
+  </div>
+</div>
+
+    <!-- libs -->
+    <script src="lib/jquery-1.8.2.min.js"></script>
+    <script src="lib/jquery-ui-1.9.1.custom.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/jquery.layout-latest.min.js"></script>
+    <!--app stuff-->
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/controllers.js"></script>
+ 
+    </body>
+</html>
