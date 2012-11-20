@@ -3,7 +3,7 @@
 <html lang="en" ng-app="sh2">
   <head>
     <meta charset="utf-8">
-    <title>SH2</title>
+    <title>SpriteHero 2.0 - Infinite Beta Edition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -21,7 +21,7 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">SH2</a>
+          <a class="brand" href="#">SpriteHero 2.0</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >File <b class="caret"></b></a>
@@ -29,11 +29,10 @@
                     <li><a tabindex="-1" href="#" ng-click="openURLModal=true">Open Sprite URL</a></li>
 
                     <li class="divider"></li>
-                    <li><a tabindex="-1" href="#">Export CSS</a></li>
-                    <li><a tabindex="-1" href="#">Export HTML</a></li>
+                    <li class="disabled" disabled="disabled"><a tabindex="-1" href="#">Export CSS</a></li>
                   </ul>
               </li>
-              <li><a href="#help" ng-click="openHelpModal=true">Help</a></li>
+              <li><a href="#help" ng-click="openHelpModal=true">About</a></li>
             </ul>
             <div class="btn-group">
               <button class="btn" ng-disabled="settings.scale == 1" ng-click="zoomOut()"><i class="icon-zoom-out"></i></button>
@@ -163,10 +162,18 @@
 <div class="modal" ui-modal ng-model="openHelpModal">
   <div class="modal-header">
     <button type="button" class="close" ng-click="openHelpModal=false" aria-hidden="true">&times;</button>
-    <h3>Help</h3>
+    <h3>About</h3>
   </div>
   <div class="modal-body">
-    Look at source code and add missing features.
+    Written by <a href="http://www.jrowny.com">Jonathan Rowny</a>
+    with help from following opensource projects
+    <ul>
+      <li><a href="http://jquery.com/">jQuery</a></li>
+      <li><a href="http://layout.jquery-dev.net/">UI Layout</a></li>
+      <li><a href="http://twitter.github.com/bootstrap/">Bootstrap 2.0</a></li>      
+      <li><a href="http://angularjs.org/">AngularJS</a></li>
+      <li><a href="http://angular-ui.github.com/">AngularUI</a></li>
+    </ul>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" ng-click="openHelpModal=false">Close</a>
