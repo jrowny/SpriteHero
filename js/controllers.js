@@ -60,6 +60,7 @@ function ImageAreaCtrl($scope, settings, sprites) {
 
 function DataCtrl($scope, sprites){
   $scope.float = 'none';
+  $scope.display = 'block';
   $scope.sprites = sprites.data;
   $scope.types = [{label:"Class", value: true}, {label:"ID", value:false}];
   $scope.psuedos = [{label:"None", value:""}, {label:"Hover", value:"hover"}, {label:"Active", value:"active"}];

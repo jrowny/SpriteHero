@@ -1,13 +1,15 @@
 <div class="btn-group">
-  <button class="btn" ng-click="float='none'">Normal</button>
-  <button class="btn" ng-click="float='left'">Float Left</button>
-  <button class="btn" ng-click="float='right'">Float right</button>
+  <button class="btn" ng-click="display='block';float='none'">Normal (block)</button>
+  <button class="btn" ng-click="display='inline-block';float='none';">Inline Block</button>
+  <button class="btn" ng-click="display='block';float='left'">Float Left</button>
+  <button class="btn" ng-click="display='block';float='right'">Float right</button>
 </div>
 
 <div class="well live">
   <div ng-repeat="sprite in sprites"  style="
+      display: {{display}};
       float:{{float}};
       width: {{sprite.width}}px;
       height: {{sprite.height}}px;
-      background: url('{{settings.image}}') {{sprite.x*-1}}px {{sprite.y*-1}}px;">&nbsp;</div>
+      background: url('{{settings.image}}') {{sprite.x*-1}}px {{sprite.y*-1}}px no-repeat;">&nbsp;</div>
 </div>
