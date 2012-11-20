@@ -13,3 +13,10 @@ var Sprite = function(x, y, w, h, id){
 Sprite.prototype.getType = function(){
   return (this.isClass) ? "Class" : "ID";
 };
+Sprite.prototype.getPsuedoOutput = function(){
+  if(this.psuedo.length) return ":" + this.psuedo;
+  return "";
+}
+Sprite.prototype.getTypeOutput = function(){
+  return (this.isClass) ? "." : "#";
+};

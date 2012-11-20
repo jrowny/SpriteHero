@@ -33,3 +33,6 @@ html, body, #layout-container {
   background: #0000FF;
   opacity : 0.5;
 }
+
+.image-info{display:inline-block; vertical-align: middle; margin:0 0 0 10px;}
+.btn.disabled.zoom, .btn[disabled].zoom{background: #fff;}

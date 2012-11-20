@@ -1,6 +1,7 @@
 function AppCtrl($scope, settings, sprites){
   $scope.openURLModal = false;
   $scope.spriteURL = "";
+  $scope.settings = settings;
   $scope.openURL = function(){
     delete sprites.current;
     sprites.data.length = 0;
@@ -28,6 +29,13 @@ function AppCtrl($scope, settings, sprites){
     if(sprites.current !== undefined)
     sprites.current.x++;
   };
+   //zoom
+  $scope.zoomIn = function(){
+    settings.scale+=0.5;
+  };
+  $scope.zoomOut = function(){
+    if(settings.scale > 1) settings.scale-=0.5;
+  };
 }
 
 function ImageAreaCtrl($scope, settings, sprites) {
@@ -37,6 +45,8 @@ function ImageAreaCtrl($scope, settings, sprites) {
 
 function DataCtrl($scope, sprites){
   $scope.sprites = sprites.data;
+  $scope.types = [{label:"Class", value: true}, {label:"ID", value:false}];
+  $scope.psuedos = [{label:"None", value:""}, {label:"Hover", value:"hover"}, {label:"Active", value:"active"}];
   $scope.trash = function(sprite){
     sprites.data.splice(sprites.data.indexOf(sprite), 1);
   };
@@ -49,12 +59,6 @@ function SettingsCtrl($scope, settings) {
     settings.gridOpacity = opacity;
   };
 
-  //zoom
-  $scope.zoomIn = function(){
-    settings.scale+=0.5;
-  };
-  $scope.zoomOut = function(){
-    if(settings.scale > 1) settings.scale-=0.5;
-  };
+ 
 }
 
