@@ -57,3 +57,5 @@ td select, td input[type="text"], td input[type="number"],td .uneditable-input  
 .selected .ui-resizable-se {background:#666; border:1px solid #333; width:4px; height:4px; right:-3px; bottom:-3px;}
 .selected .ui-resizable-sw {background:#666; border:1px solid #333; width:4px; height:4px; left:-3px; bottom:-3px;}
 .selected .ui-resizable-nw {background:#666; border:1px solid #333; width:4px; height:4px; left:-3px; top:-3px;}
+
+.live{overflow:auto;margin:20px 0;}

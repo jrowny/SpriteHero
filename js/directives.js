@@ -55,56 +55,48 @@ app.directive('sprite', function(settings, sprites){
 });
 
 app.directive('generator', function(settings, sprites){
-  var i = 0,
-      y_end = 0,
-      x_end = 0,
-      x_begin = 0,
-      y_begin = 0,
-      drag_left = false;
+  var i = 0, y_end, x_end, x_start, y_start;
   var link = function(scope, element, attrs) {
     //TODO: can we switch this to draggable?
     element.selectable({
-      start: function(e) {
+      start: function(event) {
               var offset = $(this).offset();
               //get the mouse position on start
-              x_begin = e.pageX - offset.left,
-              y_begin = e.pageY - offset.top;
+              x_start = event.pageX - offset.left,
+              y_start = event.pageY - offset.top;
             },
-      stop: function(e) {
+      stop: function(event) {
               //get the mouse position on stop
               var offset = $(this).offset(),
-                  width = 0,
-                  height = 0,
-                  sprite;
-              x_end = e.pageX - offset.left,
-              y_end = e.pageY - offset.top;
-              /***  if dragging mouse to the right direction, calcuate width/height  ***/
-              if( x_end - x_begin >= 1 ) {
-                  width  = x_end - x_begin,
-                  height = y_end - y_begin;
-              /***  if dragging mouse to the left direction, calcuate width/height (only change is x) ***/
-              } else {
-                  width  = x_begin - x_end,
-                  height =  y_end - y_begin;
-                  drag_left = true;
-              }
-              //if the mouse was dragged left, offset the gen_box position
-              //TODO: account for drag left
-              //if(drag_left) spriteBox.offset({ left: x_end + offset.left});
-              if(settings.gridEnabled){
-                 //adjust box to fit grid
-                x_begin -= x_begin % settings.grid;
-                y_begin -= y_begin % settings.grid;
-                width -= width % settings.grid;
-                height -= height % settings.grid;
-              }
+                  width, height, x, y, sprite;
 
-              sprite = new Sprite(Math.round(x_begin/settings.scale),
-                                  Math.round(y_begin/settings.scale),
+              x_end = event.pageX - offset.left,
+              y_end = event.pageY - offset.top;
+
+              //adjust box to fit grid
+              if(settings.gridEnabled){
+                x_start -= x_start % settings.grid;
+                y_start -= y_start % settings.grid;
+                x_end -= x_end % settings.grid;
+                y_end -= y_end % settings.grid;
+              }
+             
+              //account for diffferent direction drags by getting the absolute
+              width  = Math.abs(x_end - x_start);
+              height = Math.abs(y_end - y_start);
+              
+              //account for different direction drags but finding which x/y to use
+              x = (x_end < x_start) ? x_end : x_start;
+              y = (y_end < y_start) ? y_end : y_start;
+
+              //create the sprite model
+              sprite = new Sprite(Math.round(x/settings.scale),
+                                  Math.round(y/settings.scale),
                                   Math.round(width/settings.scale),
                                   Math.round(height/settings.scale),
                                   i);
 
+              //only do anything if this thing has some size (i.e. not an accidental click)
               if(width > 0 && height >0){
                 sprites.data.push(sprite);
                 i++;
