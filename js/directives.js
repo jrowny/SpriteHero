@@ -120,7 +120,7 @@ app.directive('generator', function(settings, sprites){
 });
 
 //
-app.directive('fileWindow', function(settings){
+app.directive('fileWindow', function(settings, sprites){
   var link = function(scope, element, attrs) {
     var fileField = $('<input type="file" id="files" name="files" style="display:none;"/>');
     fileField.on('change',function(event){
@@ -134,6 +134,8 @@ app.directive('fileWindow', function(settings){
           var reader = new FileReader();
           reader.onload = (function(theFile) {
             return function(event) {
+              delete sprites.current;
+              sprites.data.length = 0;
               scope.settings.image = event.target.result;
               scope.settings.imageName = theFile.name;
               if(!scope.$$phase){
@@ -162,7 +164,6 @@ app.directive('imageSource', function(settings){
     var render = function() {
       element.attr('src', settings.image);
       element.load(function(){
-        console.log(element);
         settings.width = element.context.naturalWidth;
         settings.height = element.context.naturalHeight;
         if(!scope.$$phase){

@@ -1,0 +1,43 @@
+
+<!-- modals -->
+<div class="modal" ui-modal ng-model="isURLModal">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="isURLModal=false" aria-hidden="true">&times;</button>
+    <h3>Open Image from URL</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-inline">
+      <div class="alert alert-error">
+        <h4>Warning!</h4>
+        Anything you have done will be lost when loading a new image.
+      </div>
+      <label>Image URL:</label>
+      <input type="text" class="input-xlarge" ng-model="spriteURL" placeholder="http://"/>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" ng-click="isURLModal=false">Close</a>
+    <a href="#" class="btn btn-primary" ng-click="openURL()">Open</a>
+  </div>
+</div>
+<div class="modal" ui-modal ng-model="isHelpModal">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="isHelpModal=false" aria-hidden="true">&times;</button>
+    <h3>About</h3>
+  </div>
+  <div class="modal-body">
+    Written by <a href="http://www.jrowny.com">Jonathan Rowny</a>
+    with help from following opensource projects
+    <ul>
+      <li><a href="http://jquery.com/">jQuery</a></li>
+      <li><a href="http://ui.jquery.com/">jQueryUi</a></li>
+      <li><a href="http://layout.jquery-dev.net/">UI Layout</a></li>
+      <li><a href="http://twitter.github.com/bootstrap/">Bootstrap 2.0</a></li>      
+      <li><a href="http://angularjs.org/">AngularJS</a></li>
+      <li><a href="http://angular-ui.github.com/">AngularUI</a></li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" ng-click="isHelpModal=false">Close</a>
+  </div>
+</div>

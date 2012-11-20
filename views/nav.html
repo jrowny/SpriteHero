@@ -1,0 +1,28 @@
+<div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">SpriteHero 2.0</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >File <b class="caret"></b></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a tabindex="-1" file-window>Open from Image</a></li>
+                    <li><a tabindex="-1" ng-click="openUrlModal()">Open from URL</a></li>
+                    <li class="divider"></li>
+                    <li class="disabled" disabled="disabled"><a tabindex="-1" href="#">Export CSS</a></li>
+                  </ul>
+              </li>
+              <li><a ng-click="openHelpModal()">About</a></li>
+            </ul>
+            <div class="btn-group">
+              <button class="btn" ng-disabled="settings.scale == 1" ng-click="zoomOut()"><i class="icon-zoom-out"></i></button>
+              <button class="btn" ng-disabled="settings.scale > 6.5" ng-click="zoomIn()"><i class="icon-zoom-in"></i></button>
+              <label class="btn zoom" disabled="disabled">{{settings.scale * 100}}%</label>
+              <button class="btn" ng-disabled="settings.scale > 6.5" ng-click="settings.scale = 1">Reset</button>
+            </div>  
+            <div class="image-info">
+              <a href="{{settings.image}}" target="_blank">{{settings.imageName}}</a>
+              {{settings.width}}px by {{settings.height}}px
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>

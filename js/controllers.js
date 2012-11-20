@@ -1,7 +1,15 @@
 function AppCtrl($scope, settings, sprites){
-  $scope.openURLModal = false;
+  $scope.isURLModal = false;
+  $scope.isHelpModal = false;
   $scope.spriteURL = "";
   $scope.settings = settings;
+  //for some reason we need to set this in a controller when using ng-include
+  $scope.openUrlModal = function(){
+    $scope.isURLModal = true;
+  };
+  $scope.openHelpModal = function(){
+    $scope.isHelpModal = true;
+  };
   $scope.openURL = function(){
     delete sprites.current;
     sprites.data.length = 0;
@@ -9,18 +17,6 @@ function AppCtrl($scope, settings, sprites){
     settings.imageName = $scope.spriteURL.split("/")[$scope.spriteURL.split("/").length-1];
     $scope.openURLModal = false;
   };
-  $scope.openFile = function(){
-    // Check for the various File API support.
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-      // Great success! All the File APIs are supported.
-      //ar files = window.FileList();
-      //console.log(files);
-      console.log(window.FileList());
-    } else {
-      alert('The File APIs are not fully supported in this browser.');
-    }
-  };
-
   //keys
   $scope.trash = function(){
     if(sprites.current !== undefined)
@@ -63,6 +59,7 @@ function ImageAreaCtrl($scope, settings, sprites) {
 }
 
 function DataCtrl($scope, sprites){
+  $scope.float = 'none';
   $scope.sprites = sprites.data;
   $scope.types = [{label:"Class", value: true}, {label:"ID", value:false}];
   $scope.psuedos = [{label:"None", value:""}, {label:"Hover", value:"hover"}, {label:"Active", value:"active"}];
