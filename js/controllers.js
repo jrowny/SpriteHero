@@ -13,6 +13,11 @@ function AppCtrl($scope, settings, sprites){
     sprites.data.splice(sprites.data.indexOf(sprites.current), 1);
     delete sprites.current;
   };
+  $scope.deselect = function(){
+    if(sprites.current !== undefined)
+      delete sprites.current;
+    console.log(sprites.current);
+  }
   $scope.up = function(){
     if(sprites.current !== undefined)
     sprites.current.y--;

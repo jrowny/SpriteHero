@@ -36,6 +36,12 @@ app.directive('sprite', function(settings, sprites){
     scope.$watch('settings.grid + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
       drEnable();    
     });
+    //TODO: handle selecetd class with directive
+    scope.$watch('sprites.current', function(newValue, oldValue) {
+      if(newValue === undefined){
+        $('.selected').removeClass("selected");
+      }
+    });
   };
 
   
@@ -123,6 +129,7 @@ app.directive('imageSource', function(settings){
         scale();
       }).error(function(){
         settings.image = 'images/loadingError.png';
+        element.attr('src', settings.image);
         settings.width = 500;
         settings.height = 160;
         scope.$apply();

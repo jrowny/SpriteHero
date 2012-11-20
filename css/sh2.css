@@ -26,9 +26,19 @@ html, body, #layout-container {
   background : #B5FBFF;
   opacity : 0.4;
   position : absolute;
+  overflow: hidden;
   z-index : 999;
   border:none;
 }  
+.sprite_box span{
+    display:block;
+    padding:3px 6px;
+    font-weight:bold;
+    font-size:12px;
+    background:#fff;
+    margin:10px;
+    border-radius: 5px;
+    overflow: hidden;}
 
 .selected{
   background: #B5FBFF;
@@ -37,6 +47,9 @@ html, body, #layout-container {
 
 .image-info{display:inline-block; vertical-align: middle; margin:0 0 0 10px;}
 .btn.disabled.zoom, .btn[disabled].zoom{background: #fff;}
+
+/* this seems like a stupid way to override bootstrap */
+td select, td input[type="text"], td input[type="number"],td .uneditable-input  {margin:0;}
 
 /*handles*/
 .ui-resizable-ne,.ui-resizable-se, .ui-resizable-sw, .ui-resizable-nw {display:none;}

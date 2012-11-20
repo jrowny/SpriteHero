@@ -14,6 +14,7 @@
   </head>
 
   <body ng-controller="AppCtrl" ui-keydown="{46 : 'trash()', 
+                                             27 : 'deselect()',
                                              37 : 'left()', 
                                              38 : 'up()', 
                                              39 : 'right()', 
@@ -64,6 +65,7 @@
                       height: {{sprite.height * settings.scale}}px;
                       top: {{sprite.y * settings.scale}}px;
                       left: {{sprite.x * settings.scale}}px;">
+              <span>{{sprite.getTypeOutput()}}{{sprite.name}}{{sprite.getPsuedoOutput()}}</span>  
           </div>   
         </div>
       </div>
@@ -72,7 +74,7 @@
         <form>
         <fieldset>
           <legend>Settings</legend>
-               
+               <!-- TODO: settings for opacities of elements -->
           <label class="checkbox"><input type="checkbox" ng-model="settings.gridEnabled"/> Use Grid (Experimental)</label>
           <label for="numGrid">Grid Scale:</label>
           <input type="number" id="numGrid" name="numGrid" ng-model="settings.grid" class="input-mini" ng-disabled="!settings.gridEnabled"/>
@@ -97,26 +99,27 @@
 
           <div class="tab-content">
             <div class="tab-pane active" id="data">
-              <table class="table table-bordered">
+              <table class="table table-striped table-hover">
                 <tr>
-                  <th>Name</th>
+                  <th></th>
                   <th>Type</th>
+                  <th>Name</th>
                   <th>Psuedo</th>
                   <th>Width</th>
                   <th>Height</th>
                   <th>X</th>
                   <th>Y</th>
-                  <th></th>
                 </tr>
                 <tr ng-repeat="sprite in sprites">
+                  <!--TODO: duplicate button would be nice for creating many similar layers -->
+                  <td><a class="btn btn-danger" href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
+                  <td><select ng-model="sprite.isClass" class="input-small" ng-options="t.value as t.label for t in types"/></td>
                   <td><input type="text" ng-model="sprite.name" class="input-medium"></td>
-                  <td><select ng-model="sprite.isClass" ng-options="t.value as t.label for t in types"/></td>
-                  <td><select ng-model="sprite.psuedo" ng-options="p.value as p.label for p in psuedos"/></td>
+                  <td><select ng-model="sprite.psuedo" class="input-small" ng-options="p.value as p.label for p in psuedos"/></td>
                   <td><input type="number" ng-model="sprite.width" class="input-mini"/></td>
                   <td><input type="number" ng-model="sprite.height" class="input-mini"/></td>
                   <td><input type="number" ng-model="sprite.x" class="input-mini"/></td>
                   <td><input type="number" ng-model="sprite.y" class="input-mini"/></td>
-                  <td><a href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
                 </tr>
               </table>
             </div>
@@ -169,6 +172,7 @@
     with help from following opensource projects
     <ul>
       <li><a href="http://jquery.com/">jQuery</a></li>
+      <li><a href="http://ui.jquery.com/">jQueryUi</a></li>
       <li><a href="http://layout.jquery-dev.net/">UI Layout</a></li>
       <li><a href="http://twitter.github.com/bootstrap/">Bootstrap 2.0</a></li>      
       <li><a href="http://angularjs.org/">AngularJS</a></li>
@@ -184,7 +188,6 @@
     <script src="lib/jquery-1.8.2.min.js"></script>
     <script src="lib/jquery-ui-1.9.1.custom.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="lib/underscore-min.js"></script>
     <script src="lib/angular.min.js"></script>
     <script src="lib/angular-ui.min.js"></script>
     <script src="lib/jquery.layout-latest.min.js"></script>
