@@ -6,8 +6,22 @@ function AppCtrl($scope, settings, sprites){
     delete sprites.current;
     sprites.data.length = 0;
     settings.image = $scope.spriteURL;
+    settings.imageName = $scope.spriteURL.split("/")[$scope.spriteURL.split("/").length-1];
     $scope.openURLModal = false;
   };
+  $scope.openFile = function(){
+    // Check for the various File API support.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      // Great success! All the File APIs are supported.
+      //ar files = window.FileList();
+      //console.log(files);
+      console.log(window.FileList());
+    } else {
+      alert('The File APIs are not fully supported in this browser.');
+    }
+  };
+
+  //keys
   $scope.trash = function(){
     if(sprites.current !== undefined)
     sprites.data.splice(sprites.data.indexOf(sprites.current), 1);
@@ -17,7 +31,7 @@ function AppCtrl($scope, settings, sprites){
     if(sprites.current !== undefined)
       delete sprites.current;
     console.log(sprites.current);
-  }
+  };
   $scope.up = function(){
     if(sprites.current !== undefined)
     sprites.current.y--;
@@ -57,8 +71,9 @@ function DataCtrl($scope, sprites){
   };
 }
 
-function SettingsCtrl($scope, settings) {
+function SettingsCtrl($scope, settings, sprites) {
   $scope.settings = settings;
+  $scope.sprites = sprites;
   //grid opacity
   $scope.gridOpacity = function(opacity){
     settings.gridOpacity = opacity;

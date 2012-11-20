@@ -4,6 +4,7 @@ app.directive('sprite', function(settings, sprites){
       $('.selected').removeClass("selected");
       $(this).addClass("selected");
       sprites.current = model.$viewValue;
+      scope.$apply();
     });
     //update model position on drag
     var onDrag = function(event, ui){
@@ -29,12 +30,12 @@ app.directive('sprite', function(settings, sprites){
       }else{
         element.draggable({drag: onDrag}).resizable({resize: onResize,  handles: "all"});
       }
-    }
+    };
 
     drEnable();
     //toggle dragging
     scope.$watch('settings.grid + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
-      drEnable();    
+      drEnable();
     });
     //TODO: handle selecetd class with directive
     scope.$watch('sprites.current', function(newValue, oldValue) {
@@ -98,10 +99,10 @@ app.directive('generator', function(settings, sprites){
                 height -= height % settings.grid;
               }
 
-              sprite = new Sprite(Math.round(x_begin/settings.scale), 
-                                  Math.round(y_begin/settings.scale), 
-                                  Math.round(width/settings.scale), 
-                                  Math.round(height/settings.scale), 
+              sprite = new Sprite(Math.round(x_begin/settings.scale),
+                                  Math.round(y_begin/settings.scale),
+                                  Math.round(width/settings.scale),
+                                  Math.round(height/settings.scale),
                                   i);
 
               if(width > 0 && height >0){
@@ -118,14 +119,55 @@ app.directive('generator', function(settings, sprites){
   };
 });
 
+//
+app.directive('fileWindow', function(settings){
+  var link = function(scope, element, attrs) {
+    var fileField = $('<input type="file" id="files" name="files" style="display:none;"/>');
+    fileField.on('change',function(event){
+      if(event.target.files[0] !== undefined){
+        var file = event.target.files[0];
+       // Only process image files.
+        if (!file.type.match('image.*')) {
+          //TODO: make some sort of modal window error handlers instead of using alert;
+          alert("Woops! You can only use image files such as JPG or PNG.");
+        }else{
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(event) {
+              scope.settings.image = event.target.result;
+              scope.settings.imageName = theFile.name;
+              if(!scope.$$phase){
+                scope.$apply();
+              }
+            };
+          })(file);
+          // Read in the image file as a data URL.
+          reader.readAsDataURL(file);
+        }
+      }
+    });
+    $('body').append(fileField);
+    element.click(function(){
+      fileField.click();
+    });
+  };
+  return {
+    restrict : 'A',
+    link : link
+  };
+});
+
 app.directive('imageSource', function(settings){
   var link = function(scope, element, attrs) {
     var render = function() {
       element.attr('src', settings.image);
       element.load(function(){
-        settings.width = $(this).width();
-        settings.height = $(this).height();
-        scope.$apply();
+        console.log(element);
+        settings.width = element.context.naturalWidth;
+        settings.height = element.context.naturalHeight;
+        if(!scope.$$phase){
+          scope.$apply();
+        }
         scale();
       }).error(function(){
         settings.image = 'images/loadingError.png';
@@ -135,6 +177,7 @@ app.directive('imageSource', function(settings){
         scope.$apply();
         scale();
       });
+      
     };
 
     var scale = function(){
@@ -145,7 +188,7 @@ app.directive('imageSource', function(settings){
       element.css('min-height',settings.height*settings.scale);
     };
 
-    scope.$watch('settings.image', function(newValue, oldValue) {
+    scope.$watch('settings.imageName', function(newValue, oldValue) {
       render();
     });
 

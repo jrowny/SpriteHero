@@ -16,7 +16,7 @@ Sprite.prototype.getType = function(){
 Sprite.prototype.getPsuedoOutput = function(){
   if(this.psuedo.length) return ":" + this.psuedo;
   return "";
-}
+};
 Sprite.prototype.getTypeOutput = function(){
   return (this.isClass) ? "." : "#";
 };
