@@ -21,13 +21,25 @@ app.directive('sprite', function(settings, sprites){
       sprite.y = Math.round(ui.position.top/settings.scale);
       scope.$apply();
     };
-    if(settings.gridEnabled){
-      element.draggable({ drag: onDrag, grid: [settings.grid, settings.grid] })
-             .resizable({ resize: onResize, grid: [settings.grid, settings.grid], handles: "n, w, s, e" });
-    }else{
-      element.draggable({drag: onDrag}).resizable({resize: onResize,  handles: "n, w, s, e"});
+
+    var drEnable = function(){
+      if(settings.gridEnabled){
+        element.draggable({ drag: onDrag, grid: [settings.grid, settings.grid] })
+               .resizable({ resize: onResize, grid: [settings.grid, settings.grid], handles: "all" });
+      }else{
+        element.draggable({drag: onDrag}).resizable({resize: onResize,  handles: "all"});
+      }
     }
+
+    drEnable();
+    //toggle dragging
+    scope.$watch('settings.grid + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
+      drEnable();    
+    });
   };
+
+  
+
   return {
     restrict : 'A',
     require: 'ngModel',
@@ -43,6 +55,7 @@ app.directive('generator', function(settings, sprites){
       y_begin = 0,
       drag_left = false;
   var link = function(scope, element, attrs) {
+    //TODO: can we switch this to draggable?
     element.selectable({
       start: function(e) {
               var offset = $(this).offset();
@@ -79,7 +92,11 @@ app.directive('generator', function(settings, sprites){
                 height -= height % settings.grid;
               }
 
-              sprite = new Sprite(x_begin, y_begin, width, height, i);
+              sprite = new Sprite(Math.round(x_begin/settings.scale), 
+                                  Math.round(y_begin/settings.scale), 
+                                  Math.round(width/settings.scale), 
+                                  Math.round(height/settings.scale), 
+                                  i);
 
               if(width > 0 && height >0){
                 sprites.data.push(sprite);

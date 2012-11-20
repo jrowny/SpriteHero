@@ -89,44 +89,55 @@
       </div>
 
       <div ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
-        <ul class="nav nav-tabs">
-          <li class="active" ><a href="#data" data-toggle="tab">Sprite Data</a></li>
-          <li><a href="#css" data-toggle="tab">CSS Output</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="data">
-            <table class="table table-bordered">
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Psuedo</th>
-                <th>Width</th>
-                <th>Height</th>
-                <th>X</th>
-                <th>Y</th>
-                <th></th>
-              </tr>
-              <tr ng-repeat="sprite in sprites">
-                <td><input type="text" ng-model="sprite.name" class="input-mini"></td>
-                <td><select ng-model="sprite.isClass" ng-options="t.value as t.label for t in types"/></td>
-                <td><select ng-model="sprite.psuedo" ng-options="p.value as p.label for p in psuedos"/></td>
-                <td><input type="number" ng-model="sprite.width" class="input-mini"/></td>
-                <td><input type="number" ng-model="sprite.height" class="input-mini"/></td>
-                <td><input type="number" ng-model="sprite.x" class="input-mini"/></td>
-                <td><input type="number" ng-model="sprite.y" class="input-mini"/></td>
-                <td><a href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
-              </tr>
-            </table>
-          </div>
-          <div class="tab-pane" id="css">
-              <pre class="code">
-<span ng-repeat="sprite in sprites">{{sprite.getTypeOutput()}}{{sprite.name}}{{sprite.getPsuedoOutput()}}{
-  width:{{sprite.width}}px;
-  height:{{sprite.height}}px;
-  background-position: -{{sprite.x}}px -{{sprite.y}}px;
-}
-</span>
-              </pre>
+        <div class="tabbable tabs-left">
+          <ul class="nav nav-tabs">
+            <li class="active" ><a href="#data" data-toggle="tab">Sprite Data</a></li>
+            <li><a href="#css" data-toggle="tab">CSS Output</a></li>
+            <li><a href="#live" data-toggle="tab">Live View</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="data">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Psuedo</th>
+                  <th>Width</th>
+                  <th>Height</th>
+                  <th>X</th>
+                  <th>Y</th>
+                  <th></th>
+                </tr>
+                <tr ng-repeat="sprite in sprites">
+                  <td><input type="text" ng-model="sprite.name" class="input-medium"></td>
+                  <td><select ng-model="sprite.isClass" ng-options="t.value as t.label for t in types"/></td>
+                  <td><select ng-model="sprite.psuedo" ng-options="p.value as p.label for p in psuedos"/></td>
+                  <td><input type="number" ng-model="sprite.width" class="input-mini"/></td>
+                  <td><input type="number" ng-model="sprite.height" class="input-mini"/></td>
+                  <td><input type="number" ng-model="sprite.x" class="input-mini"/></td>
+                  <td><input type="number" ng-model="sprite.y" class="input-mini"/></td>
+                  <td><a href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
+                </tr>
+              </table>
+            </div>
+            <div class="tab-pane" id="css">
+                <pre class="code">
+                  <!--
+                  TODO: probably replace this whole thing with a method in sprite so the output can be used elsewhere
+                  TODO: if a psuedo class has a matching un-psuedo'd class, don't include width/height
+                  -->
+  <span ng-repeat="sprite in sprites">{{sprite.getTypeOutput()}}{{sprite.name}}{{sprite.getPsuedoOutput()}}{
+    width:{{sprite.width}}px;
+    height:{{sprite.height}}px;
+    background-position: -{{sprite.x}}px -{{sprite.y}}px;
+  }
+  </span>
+                </pre>
+            </div>
+            <div class="tab-pane active" id="live">
+             
+            </div>
           </div>
         </div>
       </div>

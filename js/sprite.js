@@ -5,7 +5,7 @@ var Sprite = function(x, y, w, h, id){
   this.height = h;
   this.id = id;
   //defaults
-  this.name = id;
+  this.name = "element" + id;
   this.isClass = true;
   this.psuedo = "";
 };
