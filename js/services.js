@@ -16,4 +16,10 @@ app.factory('settings', function(){
 //just an array
 app.service('sprites', function(){
   this.data = [];
+  //compiles css code
+  this.compileCSS = function(){
+    this.data.forEach(function(sprite, index){
+
+    });
+  };
 });

@@ -1,0 +1,6 @@
+redo/undo support
+save persistant data to *.sh2
+save persistant data to local store
+export CSS file
+css base element options
+psuedo tag detection

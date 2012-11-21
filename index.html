@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <title>SpriteHero 2.0 - Infinite Beta Edition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="lib/jquery-ui-1.9.1.custom.min.css" rel="stylesheet">
-    <link href="lib/layout-default-latest.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/sh2.css">
+    <meta name="description" content="SpriteHero 2 is a web app to help you write">
+    <meta name="author" content="Jonathan Rowny">
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/layout-default-latest.css" rel="stylesheet" type="text/css">
+    <link href="css/sh2.css" rel="stylesheet" type="text/css">
   </head>
-  <!--TODO: redo/undo support -->
   <body ng-controller="AppCtrl" ui-keydown="{46 : 'trash()', 
                                              27 : 'deselect()',
                                              37 : 'left()', 
@@ -27,8 +26,6 @@
         <div id="sprite-container" generator>
           <img image-source id="sprite"/>
           <canvas grid id="grid"></canvas>
-
-          
           <div ng-repeat="sprite in sprites.data" 
                ng-model="sprite"
                sprite
