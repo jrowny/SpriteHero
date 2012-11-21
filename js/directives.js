@@ -25,8 +25,8 @@ app.directive('sprite', function(settings, sprites){
 
     var drEnable = function(){
       if(settings.gridEnabled){
-        element.draggable({ drag: onDrag, grid: [settings.grid, settings.grid] })
-               .resizable({ resize: onResize, grid: [settings.grid, settings.grid], handles: "all" });
+        element.draggable({ drag: onDrag, grid: [settings.grid * settings.scale, settings.grid * settings.scale] })
+               .resizable({ resize: onResize, grid: [settings.grid * settings.scale, settings.grid * settings.scale], handles: "all" });
       }else{
         element.draggable({drag: onDrag}).resizable({resize: onResize,  handles: "all"});
       }
@@ -34,7 +34,7 @@ app.directive('sprite', function(settings, sprites){
 
     drEnable();
     //toggle dragging
-    scope.$watch('settings.grid + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
+    scope.$watch('settings.scale + settings.grid + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
       drEnable();
     });
     //TODO: handle selecetd class with directive
@@ -56,6 +56,14 @@ app.directive('sprite', function(settings, sprites){
 
 app.directive('generator', function(settings, sprites){
   var i = 0, y_end, x_end, x_start, y_start;
+  var snap = function(value, grid){
+    if(value % grid < (grid/2)){ //if the modulo is less than half the grid distance
+      value -= (value % grid);
+    }else{
+      value += (grid - (value % grid));
+    }
+    return value;
+  };
   var link = function(scope, element, attrs) {
     //TODO: can we switch this to draggable?
     element.selectable({
@@ -75,10 +83,10 @@ app.directive('generator', function(settings, sprites){
 
               //adjust box to fit grid
               if(settings.gridEnabled){
-                x_start -= x_start % settings.grid;
-                y_start -= y_start % settings.grid;
-                x_end -= x_end % settings.grid;
-                y_end -= y_end % settings.grid;
+                x_start = snap(x_start, settings.grid * settings.scale);
+                y_start = snap(y_start, settings.grid * settings.scale);
+                x_end = snap(x_end, settings.grid * settings.scale);
+                y_end = snap(y_end, settings.grid * settings.scale);
               }
              
               //account for diffferent direction drags by getting the absolute
@@ -153,24 +161,23 @@ app.directive('fileWindow', function(settings, sprites){
 
 app.directive('imageSource', function(settings){
   var link = function(scope, element, attrs) {
-    var render = function() {
-      element.attr('src', settings.image);
-      element.load(function(){
+    element.load(function(){
         settings.width = element.context.naturalWidth;
         settings.height = element.context.naturalHeight;
         if(!scope.$$phase){
           scope.$apply();
         }
         scale();
-      }).error(function(){
+      }).error(function(er){
         settings.image = 'images/loadingError.png';
+        settings.imageName = 'loadingError.png';
         element.attr('src', settings.image);
         settings.width = 500;
         settings.height = 160;
-        scope.$apply();
         scale();
       });
-      
+    var render = function() {
+      element.attr('src', settings.image);
     };
 
     var scale = function(){

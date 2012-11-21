@@ -4,12 +4,6 @@ function AppCtrl($scope, settings, sprites){
   $scope.spriteURL = "";
   $scope.settings = settings;
 
-  $scope.sprites = sprites;
-  /*$scope.$watch('sprites.data', function (newVal, oldVal, scope) {
-    console.log(scope);
-    console.log('yup');
-  }, true);*/
-
   //for some reason we need to set this in a controller when using ng-include
   $scope.openUrlModal = function(){
     $scope.isURLModal = true;
@@ -20,9 +14,10 @@ function AppCtrl($scope, settings, sprites){
   $scope.openURL = function(){
     delete sprites.current;
     sprites.data.length = 0;
-    settings.image = $scope.spriteURL;
-    settings.imageName = $scope.spriteURL.split("/")[$scope.spriteURL.split("/").length-1];
-    $scope.openURLModal = false;
+    var url = angular.element('#url-window').scope().spriteURL;
+    settings.image = url;
+    settings.imageName = url.split("/")[url.split("/").length-1];
+    $scope.isURLModal = false;
   };
   //keys
   $scope.trash = function(){
