@@ -62,8 +62,13 @@ function DataCtrl($scope, sprites){
   $scope.float = 'none';
   $scope.display = 'block';
   $scope.sprites = sprites.data;
-  $scope.types = [{label:"Class", value: true}, {label:"ID", value:false}];
-  $scope.psuedos = [{label:"None", value:""}, {label:"Hover", value:"hover"}, {label:"Active", value:"active"}];
+  $scope.types = [{label:"Class", value: true},
+                  {label:"ID", value:false}];
+  $scope.psuedos = [{label:"None", value:""},
+                    {label:"Hover", value:"hover"},
+                    {label:"Active", value:"active"},
+                    {label:"Visited", value:"visited"},
+                    {label:"Focus", value:"focus"}];
   $scope.trash = function(sprite){
     sprites.data.splice(sprites.data.indexOf(sprite), 1);
   };

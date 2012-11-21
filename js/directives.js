@@ -195,6 +195,22 @@ app.directive('imageSource', function(settings){
   };
 });
 
+app.directive('compileCSS', function(settings, sprites){
+var link = function(scope, element, attrs) {
+    var render = function() {
+      element.text(sprites.compileCSS());
+    };
+    scope.$watch('sprites.data', function(newValue, oldValue) {
+      render();
+    });
+    render();
+  };
+  return {
+    restrict : 'A',
+    link : link
+  };
+});
+
 app.directive('grid', function(settings){
   var link = function(scope, element, attrs) {
     var render = function(clear) {
