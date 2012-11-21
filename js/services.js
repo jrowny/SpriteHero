@@ -16,33 +16,34 @@ app.factory('settings', function(){
 //just an array
 app.service('sprites', function(){
   this.data = [];
+  var self = this;
   //compiles css code
   var needsDimensions = function(sprite){
     //if we don't havea psuedo class, we need dimensions
     if(sprite.psuedo.length === 0) return true;
-    
-    this.data.forEach(function(findSprite, index){
+    var len = self.data.length;
+    for (var i = 0; i < len; i++){
       //the sprite we're looking for has these conditions (everything identical except psuedo)
-      if(findSprite.name === sprite.name && findSprite.isClass === sprite.isClass &&
-         findSprite.psuedo.length === 0 && findSprite.width === sprite.width &&
-         findSprite.height === sprite.height){
+      if(self.data[i].name === sprite.name && self.data[i].isClass === sprite.isClass &&
+         self.data[i].psuedo.length === 0 && self.data[i].width === sprite.width &&
+         self.data[i].height === sprite.height){
         return false;
       }
-    });
+    }
     
     //nothing found?
     return true;
   };
   this.compileCSS = function(){
     var output = "";
-    this.data.forEach(function(sprite, index){
+    self.data.forEach(function(sprite, index){
       output += sprite.getTypeOutput() + sprite.name + sprite.getPsuedoOutput() + "{\n";
       //only output the dimensions if we need to
       if(needsDimensions(sprite)){
         output += "  width: " + sprite.width + "px;\n" +
                   "  height: " + sprite.height + "px;\n";
       }
-      output += "  background-position: " + (sprite.x * -1) + "px " + (sprite.y * -1) + "px;\n}";
+      output += "  background-position: " + (sprite.x * -1) + "px " + (sprite.y * -1) + "px;\n}\n";
 
     });
 

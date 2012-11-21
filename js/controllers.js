@@ -3,6 +3,13 @@ function AppCtrl($scope, settings, sprites){
   $scope.isHelpModal = false;
   $scope.spriteURL = "";
   $scope.settings = settings;
+
+  $scope.sprites = sprites;
+  /*$scope.$watch('sprites.data', function (newVal, oldVal, scope) {
+    console.log(scope);
+    console.log('yup');
+  }, true);*/
+
   //for some reason we need to set this in a controller when using ng-include
   $scope.openUrlModal = function(){
     $scope.isURLModal = true;

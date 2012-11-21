@@ -195,14 +195,14 @@ app.directive('imageSource', function(settings){
   };
 });
 
-app.directive('compileCSS', function(settings, sprites){
+app.directive('spriteCss', function(sprites){
 var link = function(scope, element, attrs) {
     var render = function() {
       element.text(sprites.compileCSS());
     };
-    scope.$watch('sprites.data', function(newValue, oldValue) {
+    scope.$watch('$parent.sprites', function(newValue, oldValue, scope) {
       render();
-    });
+    }, true);
     render();
   };
   return {
