@@ -14,6 +14,7 @@ function AppCtrl($scope, settings, sprites){
   $scope.openURL = function(){
     delete sprites.current;
     sprites.data.length = 0;
+    sprites.index = 1;
     var url = angular.element('#url-window').scope().spriteURL;
     settings.image = url;
     settings.imageName = url.split("/")[url.split("/").length-1];
@@ -48,7 +49,9 @@ function AppCtrl($scope, settings, sprites){
   };
    //zoom
   $scope.zoomIn = function(){
-    settings.scale+=0.5;
+    if(settings.scale < 7){
+      settings.scale+=0.5;
+    }
   };
   $scope.zoomOut = function(){
     if(settings.scale > 1) settings.scale-=0.5;
@@ -60,10 +63,10 @@ function ImageAreaCtrl($scope, settings, sprites) {
   $scope.sprites = sprites;
 }
 
-function DataCtrl($scope, sprites){
+function DataCtrl($scope, sprites, spritesStorage){
   $scope.float = 'none';
   $scope.display = 'block';
-  $scope.sprites = sprites.data;
+  $scope.sprites = sprites;
   $scope.types = [{label:"Class", value: true},
                   {label:"ID", value:false}];
   $scope.psuedos = [{label:"None", value:""},
@@ -74,15 +77,35 @@ function DataCtrl($scope, sprites){
   $scope.trash = function(sprite){
     sprites.data.splice(sprites.data.indexOf(sprite), 1);
   };
+  $scope.setCurrent = function(sprite){
+    sprites.current = sprite;
+  };
+  $scope.duplicate = function(sprite){
+    sprites.data.push(new Sprite(sprite.x,
+                                sprite.y,
+                                sprite.width,
+                                sprite.height,
+                                sprites.index));
+    sprites.current = sprites.data[sprites.data.length-1];
+    sprites.index++;
+  };
+
+  $scope.$watch('sprites.data', function() {
+    spritesStorage.put(sprites.data);
+  }, true);
 }
 
-function SettingsCtrl($scope, settings, sprites) {
+function SettingsCtrl($scope, settings, settingsStorage, sprites) {
   $scope.settings = settings;
   $scope.sprites = sprites;
   //grid opacity
   $scope.gridOpacity = function(opacity){
     settings.gridOpacity = opacity;
   };
+
+  $scope.$watch('settings', function() {
+    settingsStorage.put(settings);
+  }, true);
 
  
 }

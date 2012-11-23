@@ -1,11 +1,5 @@
 app.directive('sprite', function(settings, sprites){
   var link = function(scope, element, attrs, model) {
-    element.mousedown(function(){
-      $('.selected').removeClass("selected");
-      $(this).addClass("selected");
-      sprites.current = model.$viewValue;
-      scope.$apply();
-    });
     //update model position on drag
     var onDrag = function(event, ui){
       var sprite = model.$viewValue;
@@ -37,12 +31,7 @@ app.directive('sprite', function(settings, sprites){
     scope.$watch('settings.scale + settings.grid + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
       drEnable();
     });
-    //TODO: handle selecetd class with directive
-    scope.$watch('sprites.current', function(newValue, oldValue) {
-      if(newValue === undefined){
-        $('.selected').removeClass("selected");
-      }
-    });
+    
   };
 
   
@@ -55,7 +44,7 @@ app.directive('sprite', function(settings, sprites){
 });
 
 app.directive('generator', function(settings, sprites){
-  var i = 0, y_end, x_end, x_start, y_start;
+  var y_end, x_end, x_start, y_start;
   var snap = function(value, grid){
     if(value % grid < (grid/2)){ //if the modulo is less than half the grid distance
       value -= (value % grid);
@@ -102,12 +91,12 @@ app.directive('generator', function(settings, sprites){
                                   Math.round(y/settings.scale),
                                   Math.round(width/settings.scale),
                                   Math.round(height/settings.scale),
-                                  i);
+                                  sprites.index);
 
               //only do anything if this thing has some size (i.e. not an accidental click)
               if(width > 0 && height >0){
                 sprites.data.push(sprite);
-                i++;
+                sprites.index++;
                 scope.$apply();
               }
             }
@@ -123,35 +112,43 @@ app.directive('generator', function(settings, sprites){
 app.directive('fileWindow', function(settings, sprites){
   var link = function(scope, element, attrs) {
     var fileField = $('<input type="file" id="files" name="files" style="display:none;"/>');
-    fileField.on('change',function(event){
-      if(event.target.files[0] !== undefined){
-        var file = event.target.files[0];
-       // Only process image files.
-        if (!file.type.match('image.*')) {
-          //TODO: make some sort of modal window error handlers instead of using alert;
-          alert("Woops! You can only use image files such as JPG or PNG.");
-        }else{
-          var reader = new FileReader();
-          reader.onload = (function(theFile) {
-            return function(event) {
-              delete sprites.current;
-              sprites.data.length = 0;
-              scope.settings.image = event.target.result;
-              scope.settings.imageName = theFile.name;
-              if(!scope.$$phase){
-                scope.$apply();
-              }
-            };
-          })(file);
-          // Read in the image file as a data URL.
-          reader.readAsDataURL(file);
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+  
+      fileField.on('change',function(event){
+        if(event.target.files[0] !== undefined){
+          var file = event.target.files[0];
+         // Only process image files.
+          if (!file.type.match('image.*')) {
+            //TODO: make some sort of modal window error handlers instead of using alert;
+            alert("Woops! You can only use image files such as JPG or PNG.");
+          }else{
+            var reader = new FileReader();
+            reader.onload = (function(theFile) {
+              return function(event) {
+                delete sprites.current;
+                sprites.data.length = 0;
+                sprites.index = 1;
+                scope.settings.image = event.target.result;
+                scope.settings.imageName = theFile.name;
+                if(!scope.$$phase){
+                  scope.$apply();
+                }
+              };
+            })(file);
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(file);
+          }
         }
-      }
-    });
-    $('body').append(fileField);
-    element.click(function(){
-      fileField.click();
-    });
+        $('body').append(fileField);
+        element.click(function(){
+          fileField.click();
+        });
+      });
+    } else {
+      //TODO: probably need to centralize a place for detection of unsupported browsers... or maybe just redirect users to AOL.com
+      alert('The File APIs are not fully supported in this browser so you won\'t be able to load local files.');
+      $('.openFromImage').attr('disabled', 'disabled');
+    }
   };
   return {
     restrict : 'A',

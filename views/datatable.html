@@ -10,9 +10,17 @@
                   <th>X</th>
                   <th>Y</th>
                 </tr>
-                <tr ng-repeat="sprite in sprites">
+                <tr ng-repeat="sprite in sprites.data" >
                   <!--TODO: duplicate button would be nice for creating many similar layers -->
-                  <td><a class="btn btn-danger" href="#" ng-click="trash(sprite)"><i class="icon-trash"></i></a></td>
+                  <td>
+                    <div class="btn-group">
+                      <a class="btn" ui-jq="tooltip" title="Select" 
+                         ng-class="{true: 'btn-info', false: ''}[sprite == sprites.current]" 
+                         ng-click="setCurrent(sprite)">
+                         <i ng-class="{true: 'icon-star', false: 'icon-star-empty'}[sprite == sprites.current]"></i></a>
+                      <a class="btn" ui-jq="tooltip" title="Duplicate" ng-click="duplicate(sprite)" ng-click="trash(sprite)"><i class="icon-plus"></i></a>
+                      <a class="btn" ui-jq="tooltip" title="Delete" ng-click="trash(sprite)"><i class="icon-trash"></i></a>
+                    </div></td>
                   <td><select ng-model="sprite.isClass" class="input-small" ng-options="t.value as t.label for t in types"/></td>
                   <td><input type="text" ng-model="sprite.name" class="input-medium"></td>
                   <td><select ng-model="sprite.psuedo" class="input-small" ng-options="p.value as p.label for p in psuedos"/></td>

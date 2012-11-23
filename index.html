@@ -17,7 +17,11 @@
                                              37 : 'left()', 
                                              38 : 'up()', 
                                              39 : 'right()', 
-                                             40 : 'down()'}" >
+                                             40 : 'down()',
+                                             187: 'zoomIn()',
+                                             107: 'zoomIn()',
+                                             109: 'zoomOut()',
+                                             189: 'zoomOut()'}" >
 
     <div class="navbar" ng-include="'views/nav.html'"></div>
 
@@ -28,6 +32,8 @@
           <canvas grid id="grid"></canvas>
           <div ng-repeat="sprite in sprites.data" 
                ng-model="sprite"
+               ng-mousedown="sprites.current = sprite"
+               ng-class="{true:'selected', false:''}[sprite == sprites.current]"
                sprite
                class="sprite_box" 
                style="width: {{sprite.width * settings.scale}}px; 
@@ -39,7 +45,7 @@
         </div>
       </div>
 
-      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl" n>
+      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
         <fieldset ng-include="'views/quickview.html'"></fieldset>
         <fieldset ng-include="'views/settings.html'"></fieldset>
       </div>
