@@ -1,8 +1,8 @@
 
 app.factory('settings', function(){
   var settingsInstance = {
-    image       : 'http://media.smashingmagazine.com/images/css-sprites/dragon.jpg',
-    imageName   : 'dragon.jpg',
+    image       : 'images/welcome.png',
+    imageName   : 'welcome.png',
     grid        : 10,
     width       : 0,
     height      : 0,
