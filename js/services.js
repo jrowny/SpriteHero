@@ -1,21 +1,55 @@
+app.factory('settingsStorage', function() {
+  var STORAGE_ID = 'sh2-settings';
 
-app.factory('settings', function(){
-  var settingsInstance = {
-    image       : 'images/welcome.png',
-    imageName   : 'welcome.png',
-    grid        : 10,
-    width       : 0,
-    height      : 0,
-    scale       : 1,
-    gridEnabled : false,
-    gridOpacity : 0.2
+  return {
+    get: function() {
+      var settings = JSON.parse(localStorage.getItem(STORAGE_ID));
+      if(!settings){
+        settings = {image: 'images/welcome.png', imageName: 'welcome.png',  grid: 10,  width: 0, height: 0, scale: 1, gridEnabled : false, gridOpacity : 0.2};
+      }
+      return settings;
+    },
+
+    put: function( settings ) {
+      localStorage.setItem(STORAGE_ID, JSON.stringify(settings));
+    }
   };
+});
+
+app.factory('spritesStorage', function() {
+  var STORAGE_ID = 'sh2-sprites', i = 0;
+  return {
+    index: function(){
+      return i;
+    },
+    get: function() {
+      var parsedData = [];
+      data = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+      
+      //TODO: find a way to fix this
+      //translate the saved data back into JS objects, there must be a better way to serialize
+      data.forEach(function(item, index){
+        parsedData.push(new Sprite(item.x, item.y, item.width, item.height, item.id));
+        if(item.id > i) i = item.id;
+      });
+      i++;
+      return parsedData;
+    },
+    put: function( sprites ) {
+      localStorage.setItem(STORAGE_ID, JSON.stringify(sprites));
+    }
+  };
+});
+
+app.factory('settings', function(settingsStorage){
+  var settingsInstance = settingsStorage.get();
   return settingsInstance;
 });
 
 //just an array
-app.service('sprites', function(){
-  this.data = [];
+app.service('sprites', function(spritesStorage){
+  this.data = spritesStorage.get();
+  this.index = spritesStorage.index();
   var self = this;
   //compiles css code
   var needsDimensions = function(sprite){
