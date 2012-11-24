@@ -5,7 +5,7 @@ function AppCtrl($scope, settings, sprites){
   $scope.settings = settings;
 
   $scope.exportCSS = function(){
-    var dataURI = "data:application/json," + encodeURIComponent(sprites.compileCSS());
+    var dataURI = "data:text/css," + encodeURIComponent(sprites.compileCSS());
     window.open(dataURI, '_blank');
   }
 
