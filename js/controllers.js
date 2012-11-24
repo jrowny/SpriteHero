@@ -4,6 +4,11 @@ function AppCtrl($scope, settings, sprites){
   $scope.spriteURL = "";
   $scope.settings = settings;
 
+  $scope.exportCSS = function(){
+    var dataURI = "data:application/json," + encodeURIComponent(sprites.compileCSS());
+    window.open(dataURI, '_blank');
+  }
+
   //for some reason we need to set this in a controller when using ng-include
   $scope.openUrlModal = function(){
     $scope.isURLModal = true;

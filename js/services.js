@@ -34,6 +34,7 @@ app.service('sprites', function(){
     //nothing found?
     return true;
   };
+  
   this.compileCSS = function(){
     var output = "";
     self.data.forEach(function(sprite, index){
