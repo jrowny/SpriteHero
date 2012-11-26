@@ -111,9 +111,8 @@ app.directive('generator', function(settings, sprites){
 //
 app.directive('fileWindow', function(settings, sprites){
   var link = function(scope, element, attrs) {
-    var fileField = $('<input type="file" id="files" name="files" style="display:none;"/>');
     if (window.File && window.FileReader && window.FileList && window.Blob) {
-  
+      var fileField = $('<input type="file" id="files" name="files" style="display:none;"/>');
       fileField.on('change',function(event){
         if(event.target.files[0] !== undefined){
           var file = event.target.files[0];
@@ -139,11 +138,12 @@ app.directive('fileWindow', function(settings, sprites){
             reader.readAsDataURL(file);
           }
         }
-        $('body').append(fileField);
+      });
+
+      $('body').append(fileField);
         element.click(function(){
           fileField.click();
         });
-      });
     } else {
       //TODO: probably need to centralize a place for detection of unsupported browsers... or maybe just redirect users to AOL.com
       alert('The File APIs are not fully supported in this browser so you won\'t be able to load local files.');
