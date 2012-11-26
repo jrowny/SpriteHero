@@ -43,12 +43,12 @@
                       height: {{sprite.height * settings.scale}}px;
                       top: {{sprite.y * settings.scale}}px;
                       left: {{sprite.x * settings.scale}}px;">
-              <span>{{sprite.getTypeOutput()}}{{sprite.name}}{{sprite.getPsuedoOutput()}}</span>  
+              <span>{{sprite.getTypeOutput()}}{{sprite.name}}{{sprite.getPseudoOutput()}}</span>  
           </div>   
         </div>
       </div>
       <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
-        <fieldset ng-include="'views/quickview.html'"></fieldset>
+        <fieldset ng-include="'views/quickview.html'" ng-show="sprites.current"></fieldset>
         <fieldset ng-include="'views/settings.html'"></fieldset>
       </div>
       <div ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
@@ -56,7 +56,7 @@
           <ul class="nav nav-tabs">
             <li class="active" ><a href="#data" data-toggle="tab">Sprite Data</a></li>
             <li><a href="#css" data-toggle="tab">CSS Output</a></li>
-            <li><a href="#live" data-toggle="tab">Live View</a></li>
+            <li><a href="#live" data-toggle="tab">Live Preview</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="data" ng-include="'views/datatable.html'"></div>

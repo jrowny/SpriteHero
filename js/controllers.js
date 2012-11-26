@@ -5,9 +5,9 @@ function AppCtrl($scope, settings, sprites){
   $scope.settings = settings;
 
   $scope.exportCSS = function(){
-    var dataURI = "data:text/css," + encodeURIComponent(sprites.compileCSS());
+    var dataURI = "data:text/css," + encodeURIComponent(sprites.compileCSS(settings.includeBase));
     window.open(dataURI, '_blank');
-  }
+  };
 
   //for some reason we need to set this in a controller when using ng-include
   $scope.openUrlModal = function(){
@@ -74,7 +74,7 @@ function DataCtrl($scope, sprites, spritesStorage){
   $scope.sprites = sprites;
   $scope.types = [{label:"Class", value: true},
                   {label:"ID", value:false}];
-  $scope.psuedos = [{label:"None", value:""},
+  $scope.pseudos = [{label:"None", value:""},
                     {label:"Hover", value:"hover"},
                     {label:"Active", value:"active"},
                     {label:"Visited", value:"visited"},

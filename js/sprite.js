@@ -7,15 +7,15 @@ var Sprite = function(x, y, w, h, id){
   //defaults
   this.name = "element" + id;
   this.isClass = true;
-  this.psuedo = "";
+  this.pseudo = "";
 };
 
 Sprite.prototype.getType = function(){
   return (this.isClass) ? "Class" : "ID";
 };
 
-Sprite.prototype.getPsuedoOutput = function(){
-  if(this.psuedo.length) return ":" + this.psuedo;
+Sprite.prototype.getPseudoOutput = function(){
+  if(this.pseudo.length) return ":" + this.pseudo;
   return "";
 };
 Sprite.prototype.getTypeOutput = function(){

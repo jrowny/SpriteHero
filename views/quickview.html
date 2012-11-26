@@ -1,9 +1,7 @@
-<fieldset>
-  <legend>Quick View</legend>
-  {{sprites.current.getTypeOutput()}}{{sprites.current.name}}{{sprites.current.getPsuedoOutput()}}
-  <div style="
-      width: {{sprites.current.width}}px;
-      height: {{sprites.current.height}}px;
-      background: url('{{settings.image}}') {{sprites.current.x*-1}}px {{sprites.current.y*-1}}px no-repeat;
-      ">&nbsp;</div>
-</fieldset> 
+<legend>Quick View</legend>
+{{sprites.current.getTypeOutput()}}{{sprites.current.name}}{{sprites.current.getPseudoOutput()}}
+<div style="
+    width: {{sprites.current.width}}px;
+    height: {{sprites.current.height}}px;
+    background: url('{{settings.image}}') {{sprites.current.x*-1}}px {{sprites.current.y*-1}}px no-repeat;
+    ">&nbsp;</div>

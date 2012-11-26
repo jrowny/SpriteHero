@@ -199,14 +199,13 @@ app.directive('imageSource', function(settings){
   };
 });
 
-app.directive('spriteCss', function(sprites){
+app.directive('spriteCss', function(sprites, settings){
 var link = function(scope, element, attrs) {
     var render = function() {
-      element.text(sprites.compileCSS());
+      element.text(sprites.compileCSS(settings.includeBase));
     };
-    scope.$watch('$parent.sprites', function(newValue, oldValue, scope) {
-      render();
-    }, true);
+    scope.$watch('$parent.sprites', render, true);
+    scope.$watch('$parent.settings.includeBase + settings.image + $parent.settings.legacy + $parent.settings.baseElement', render);
     render();
   };
   return {

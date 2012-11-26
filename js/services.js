@@ -5,7 +5,18 @@ app.factory('settingsStorage', function() {
     get: function() {
       var settings = JSON.parse(localStorage.getItem(STORAGE_ID));
       if(!settings){
-        settings = {image: 'images/welcome.png', imageName: 'welcome.png',  grid: 10,  width: 0, height: 0, scale: 1, gridEnabled : false, gridOpacity : 0.2};
+        settings = {image: 'images/welcome.png',
+                    imageName : 'welcome.png',
+                    grid : 16,
+                    width : 0,
+                    height : 0,
+                    scale : 1,
+                    gridEnabled : false,
+                    gridOpacity : 0.2,
+                    baseElement : ".sprite",
+                    includeBase : true,
+                    legacy : false
+                  };
       }
       return settings;
     },
@@ -47,19 +58,19 @@ app.factory('settings', function(settingsStorage){
 });
 
 //just an array
-app.service('sprites', function(spritesStorage){
+app.service('sprites', function(spritesStorage, settings){
   this.data = spritesStorage.get();
   this.index = spritesStorage.index();
   var self = this;
   //compiles css code
   var needsDimensions = function(sprite){
-    //if we don't havea psuedo class, we need dimensions
-    if(sprite.psuedo.length === 0) return true;
+    //if we don't havea pseudo class, we need dimensions
+    if(sprite.pseudo.length === 0) return true;
     var len = self.data.length;
     for (var i = 0; i < len; i++){
-      //the sprite we're looking for has these conditions (everything identical except psuedo)
+      //the sprite we're looking for has these conditions (everything identical except pseudo)
       if(self.data[i].name === sprite.name && self.data[i].isClass === sprite.isClass &&
-         self.data[i].psuedo.length === 0 && self.data[i].width === sprite.width &&
+         self.data[i].pseudo.length === 0 && self.data[i].width === sprite.width &&
          self.data[i].height === sprite.height){
         return false;
       }
@@ -69,10 +80,21 @@ app.service('sprites', function(spritesStorage){
     return true;
   };
   
-  this.compileCSS = function(){
+  this.compileCSS = function(includeBase){
     var output = "";
+    var image = (settings.image.substring(0,14) === 'data:image/png') ? settings.imageName : settings.image;
+      if(includeBase !== undefined && includeBase){
+      output += settings.baseElement + "{\n" +
+                "  background: url('" + image + "') no-repeat;\n" +
+                "  color: transparent;\n";
+      if(settings.legacy){
+        output += "  text-indent: -900em;\n" +
+                  "  overflow: hidden;\n";
+      }
+      output += "}\n\n";
+    }
     self.data.forEach(function(sprite, index){
-      output += sprite.getTypeOutput() + sprite.name + sprite.getPsuedoOutput() + "{\n";
+      output += sprite.getTypeOutput() + sprite.name + sprite.getPseudoOutput() + "{\n";
       //only output the dimensions if we need to
       if(needsDimensions(sprite)){
         output += "  width: " + sprite.width + "px;\n" +
