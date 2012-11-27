@@ -8,8 +8,7 @@ function AppCtrl($scope, settings, sprites){
     var dataURI = "data:text/css," + encodeURIComponent(sprites.compileCSS(settings.includeBase));
     window.open(dataURI, '_blank');
   };
-
-  //for some reason we need to set this in a controller when using ng-include
+ 
   $scope.openUrlModal = function(){
     $scope.isURLModal = true;
   };

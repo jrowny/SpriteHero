@@ -1,8 +1,8 @@
 
 <!-- modals -->
-<div class="modal" ui-modal ng-model="isURLModal" id="url-window">
+<div class="modal" ui-modal ng-model="$parent.isURLModal" id="url-window">
   <div class="modal-header">
-    <button type="button" class="close" ng-click="isURLModal=false" aria-hidden="true">&times;</button>
+    <button type="button" class="close" ng-click="$parent.isURLModal=false" aria-hidden="true">&times;</button>
     <h3>Open Image from URL</h3>
   </div>
   <div class="modal-body">
@@ -16,13 +16,13 @@
     </form>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn" ng-click="isURLModal=false">Close</a>
+    <a href="#" class="btn" ng-click="$parent.isURLModal=false">Close</a>
     <a href="#" class="btn btn-primary" ng-click="openURL()">Open</a>
   </div>
 </div>
-<div class="modal" ui-modal ng-model="isHelpModal">
+<div class="modal" ui-modal ng-model="$parent.isHelpModal">
   <div class="modal-header">
-    <button type="button" class="close" ng-click="isHelpModal=false" aria-hidden="true">&times;</button>
+    <button type="button" class="close" ng-click="$parent.isHelpModal=false" aria-hidden="true">&times;</button>
     <h3>About</h3>
   </div>
   <div class="modal-body">
@@ -38,6 +38,6 @@
     </ul>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn" ng-click="isHelpModal=false">Close</a>
+    <a href="#" class="btn" ng-click="$parent.isHelpModal=false">Close</a>
   </div>
 </div>
