@@ -200,10 +200,12 @@ app.directive('imageSource', function(settings){
 });
 
 app.directive('spriteCss', function(sprites, settings){
-var link = function(scope, element, attrs) {
+  var link = function(scope, element, attrs) {
     var render = function() {
       element.text(sprites.compileCSS(settings.includeBase));
+      hljs.highlightBlock(element[0], null, false);
     };
+
     scope.$watch('$parent.sprites', render, true);
     scope.$watch('$parent.settings.includeBase + settings.image + $parent.settings.legacy + $parent.settings.baseElement', render);
     render();

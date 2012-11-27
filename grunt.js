@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         dest: 'dist/js/sh2.js'
       },
       libs: {
-        src:['lib/jquery-1.8.2.min.js', 'lib/jquery-ui-1.9.1.custom.min.js', 'lib/bootstrap/js/bootstrap.min.js', 'lib/angular.min.js', 'lib/angular-ui.min.js', 'lib/jquery.layout-latest.min.js'],
+        src:['lib/jquery-1.8.2.min.js', 'lib/jquery-ui-1.9.1.custom.min.js', 'lib/bootstrap/js/bootstrap.min.js', 'lib/angular.min.js', 'lib/angular-ui.min.js', 'lib/jquery.layout-latest.min.js', 'lib/highlight.min.js'],
         dest: 'dist/js/libs.js'
       }
     },
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         dest: 'dist/css/sh2.css'
       },
       libs: {
-        src: ['lib/bootstrap/css/bootstrap.min.css', 'lib/jquery-ui-1.9.1.custom.min.css', 'lib/layout-default-latest.css', 'css/sh2.css'],
+        src: ['lib/bootstrap/css/bootstrap.min.css', 'lib/jquery-ui-1.9.1.custom.min.css', 'lib/layout-default-latest.css', 'lib/github.css', 'css/sh2.css'],
         dest: 'dist/css/libs.css'
       }
     },
