@@ -38,7 +38,7 @@
     <div id="layout-container" data-layout>
       <div id="imageArea"  data-ng-controller="ImageAreaCtrl" class="pane ui-layout-center">
         <div id="sprite-container" data-generator>
-          <img image-source id="sprite"/>
+          <img data-image-source id="sprite"/>
           <canvas data-grid id="grid"></canvas>
           <div data-ng-repeat="sprite in sprites.data" 
                data-ng-model="sprite"
@@ -77,7 +77,7 @@
     <!--(if target dist)>
     <script>
       head.js("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",
-              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js",
+              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js",
               "js/libs.js",
               "js/sh2.js");
       head.ready(function(){$('.loading').remove();});
@@ -86,7 +86,7 @@
     <!--(if target dev)><!-->
     <script>
       head.js("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",              
-              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js",
+              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js",
               "lib/jquery-ui-1.9.1.custom.min.js",
               "lib/bootstrap/js/bootstrap.min.js",
               "lib/angular-ui.min.js",
