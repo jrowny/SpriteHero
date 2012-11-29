@@ -1,4 +1,3 @@
-
 <!-- modals -->
 <div class="modal" ui-modal ng-model="$parent.isURLModal" id="url-window">
   <div class="modal-header">
@@ -7,7 +6,7 @@
   </div>
   <div class="modal-body">
     <form class="form-inline">
-      <div class="alert alert-error">
+      <div class="alert">
         <h4>Warning!</h4>
         Anything you have done will be lost when loading a new image.
       </div>
@@ -28,15 +27,24 @@
   <div class="modal-body">
     Written by <a href="http://www.jrowny.com">Jonathan Rowny</a>
     with help from following opensource projects
-    <ul>
-      <li><a href="http://jquery.com/">jQuery</a></li>
-      <li><a href="http://ui.jquery.com/">jQueryUi</a></li>
-      <li><a href="http://layout.jquery-dev.net/">UI Layout</a></li>
-      <li><a href="http://twitter.github.com/bootstrap/">Bootstrap 2.0</a></li>      
-      <li><a href="http://angularjs.org/">AngularJS</a></li>
-      <li><a href="http://angular-ui.github.com/">AngularUI</a></li>
-      <li><a href="http://softwaremaniacs.org/soft/highlight/en/">HighlightJS</a></li>
-    </ul>
+    <dl>
+      <dt><a href="http://jquery.com/">jQuery</a></dt>
+      <dd>DOM manipulator</dd> 
+      <dt><a href="http://ui.jquery.com/">jQueryUi</a></dt>
+      <dd>For draging and resize support</dd>
+      <dt><a href="http://layout.jquery-dev.net/">UI Layout</a></dt>
+      <dd>Fancy resizable layout</dd>
+      <dt><a href="http://twitter.github.com/bootstrap/">Bootstrap 2.0</a></dt>      
+      <dd>Making ugly things pretty</dd>
+      <dt><a href="http://angularjs.org/">AngularJS</a></dt>
+      <dd>Framework, magical bindings, and other wizardry</dd>
+      <dt><a href="http://angular-ui.github.com/">AngularUI</a></dt>
+      <dd>Glues Bootstrap to Angular</dd>
+      <dt><a href="http://softwaremaniacs.org/soft/highlight/en/">HighlightJS</a></dt>
+      <dd>Syntax Highlighting</dd>
+      <dt><a href="http://http://headjs.com/">HeadJS</a></dt>
+      <dd>Parallel JavaScript loading</dd>
+    </dl>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" ng-click="$parent.isHelpModal=false">Close</a>

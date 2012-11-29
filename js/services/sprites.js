@@ -1,41 +1,14 @@
-app.factory('settingsStorage', function() {
-  var STORAGE_ID = 'sh2-settings';
-
-  return {
-    get: function() {
-      var settings = JSON.parse(localStorage.getItem(STORAGE_ID));
-      if(!settings){
-        settings = {image: 'images/welcome.png',
-                    imageName : 'welcome.png',
-                    grid : 16,
-                    width : 0,
-                    height : 0,
-                    scale : 1,
-                    gridEnabled : false,
-                    gridOpacity : 0.2,
-                    baseElement : ".sprite",
-                    includeBase : true,
-                    legacy : false
-                  };
-      }
-      return settings;
-    },
-
-    put: function( settings ) {
-      localStorage.setItem(STORAGE_ID, JSON.stringify(settings));
-    }
-  };
-});
-
+/*global Sprite:true */
 app.factory('spritesStorage', function() {
+  "use strict";
   var STORAGE_ID = 'sh2-sprites', i = 0;
   return {
     index: function(){
       return i;
     },
     get: function() {
-      var parsedData = [];
-      data = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+      var parsedData = [],
+          data = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
       
       //TODO: find a way to fix this
       //translate the saved data back into JS objects, there must be a better way to serialize
@@ -52,13 +25,11 @@ app.factory('spritesStorage', function() {
   };
 });
 
-app.factory('settings', function(settingsStorage){
-  var settingsInstance = settingsStorage.get();
-  return settingsInstance;
-});
+
 
 //just an array
 app.service('sprites', function(spritesStorage, settings){
+  "use strict";
   this.data = spritesStorage.get();
   this.index = spritesStorage.index();
   var self = this;

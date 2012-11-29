@@ -17,6 +17,7 @@
     <link href="lib/github.css" rel="stylesheet" type="text/css">
     <link href="css/sh2.css" rel="stylesheet" type="text/css">
     <!--<!(endif)-->
+    <script src="lib/head.load.min.js"></script>
   </head>
   <body ng-controller="AppCtrl" ui-keydown="{46 : 'trash()', 
                                              27 : 'deselect()',
@@ -28,6 +29,11 @@
                                              107: 'zoomIn()',
                                              109: 'zoomOut()',
                                              189: 'zoomOut()'}" >
+    <div class="loading">
+      <div class="well">
+        Loading...
+      </div>
+    </div>
     <div class="navbar" ng-include="'views/nav.html'"></div>
     <div id="layout-container" layout>
       <div id="imageArea"  ng-controller="ImageAreaCtrl" class="pane ui-layout-center">
@@ -69,22 +75,40 @@
     </div> 
     <ng-include src="'views/modals.html'" id="modal-windows"></ng-include>     
     <!--(if target dist)>
-    <script src="js/libs.js" type="text/javascript"></script>
-    <script src="js/sh2.js" type="text/javascript"></script>
+    <script>
+      head.js("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",
+              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js",
+              "js/libs.js",
+              "js/sh2.js");
+      head.ready(function(){$('.loading').remove();});
+    </script>
     <!(endif)-->
     <!--(if target dev)><!-->
-    <script src="lib/jquery-1.8.2.min.js"></script>
-    <script src="lib/jquery-ui-1.9.1.custom.min.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-ui.min.js"></script>
-    <script src="lib/jquery.layout-latest.min.js"></script>
-    <script src="lib/highlight.min.js"></script>
-    <script src="js/sprite.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/controllers.js"></script>
+    <script>
+      head.js("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",              
+              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js",
+              "lib/jquery-ui-1.9.1.custom.min.js",
+              "lib/bootstrap/js/bootstrap.min.js",
+              "lib/angular-ui.min.js",
+              "lib/jquery.layout-latest.min.js",
+              "lib/highlight.min.js",
+              "js/app.js",
+              "js/model/sprite.js",
+              "js/services/settings.js",
+              "js/services/sprites.js",
+              "js/directives/css.js",
+              "js/directives/file.js",
+              "js/directives/generator.js",
+              "js/directives/grid.js",
+              "js/directives/image.js",
+              "js/directives/layout.js",
+              "js/directives/sprite.js",
+              "js/controllers/app.js",
+              "js/controllers/data.js",
+              "js/controllers/image.js",
+              "js/controllers/settings.js");
+      head.ready(function(){$('.loading').remove();});
+    </script>
     <!--<!(endif)-->
     </body>
 </html>
