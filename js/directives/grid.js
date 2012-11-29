@@ -26,12 +26,13 @@ app.directive('grid', function(settings){
         context.stroke();
       }
     };
-    scope.$watch('settings.grid + settings.width + settings.height + settings.scale + settings.gridOpacity + settings.gridEnabled', function(newValue, oldValue) {
-      if(settings.grid < 1 || !settings.gridEnabled){
-        render(false);
-      }else{
-        render();
-      }
+    scope.$watch('settings.grid + settings.width + settings.height + settings.scale + settings.gridOpacity + settings.gridEnabled',
+      function(newValue, oldValue) {
+        if(settings.grid < 1 || !settings.gridEnabled){
+          render(false);
+        }else{
+          render();
+        }
     });
     
 

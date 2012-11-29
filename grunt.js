@@ -8,7 +8,7 @@ module.exports = function(grunt) {
              'js/model/sprite.js',
              'js/services/settings.js',
              'js/services/sprites.js',
-             'js/directives/css.js',
+             'js/directives/highlight.js',
              'js/directives/file.js',
              'js/directives/generator.js',
              'js/directives/grid.js',

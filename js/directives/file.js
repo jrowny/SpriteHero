@@ -38,7 +38,7 @@ app.directive('fileWindow', function(settings, sprites){
     } else {
       //TODO: probably need to centralize a place for detection of unsupported browsers... or maybe just redirect users to AOL.com
       alert('The File APIs are not fully supported in this browser so you won\'t be able to load local files.');
-      $('.openFromImage').attr('disabled', 'disabled');
+      element.attr('disabled', 'disabled');
     }
   };
   return {

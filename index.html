@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="sh2">
+<html lang="en" data-ng-app="sh2">
   <head>
     <meta charset="utf-8">
     <title>SpriteHero 2.0 - Beta</title>
@@ -19,7 +19,7 @@
     <!--<!(endif)-->
     <script src="lib/head.load.min.js"></script>
   </head>
-  <body ng-controller="AppCtrl" ui-keydown="{46 : 'trash()', 
+  <body data-ng-controller="AppCtrl" data-ui-keydown="{46 : 'trash()', 
                                              27 : 'deselect()',
                                              37 : 'left()', 
                                              38 : 'up()', 
@@ -34,17 +34,17 @@
         Loading...
       </div>
     </div>
-    <div class="navbar" ng-include="'views/nav.html'"></div>
-    <div id="layout-container" layout>
-      <div id="imageArea"  ng-controller="ImageAreaCtrl" class="pane ui-layout-center">
-        <div id="sprite-container" generator>
+    <div class="navbar" data-ng-include="'views/nav.html'"></div>
+    <div id="layout-container" data-layout>
+      <div id="imageArea"  data-ng-controller="ImageAreaCtrl" class="pane ui-layout-center">
+        <div id="sprite-container" data-generator>
           <img image-source id="sprite"/>
-          <canvas grid id="grid"></canvas>
-          <div ng-repeat="sprite in sprites.data" 
-               ng-model="sprite"
-               ng-mousedown="sprites.current = sprite"
-               ng-class="{true:'selected', false:''}[sprite == sprites.current]"
-               sprite
+          <canvas data-grid id="grid"></canvas>
+          <div data-ng-repeat="sprite in sprites.data" 
+               data-ng-model="sprite"
+               data-ng-mousedown="sprites.current = sprite"
+               data-ng-class="{true:'selected', false:''}[sprite == sprites.current]"
+               data-sprite
                class="sprite_box" 
                style="width: {{sprite.width * settings.scale}}px; 
                       height: {{sprite.height * settings.scale}}px;
@@ -55,10 +55,10 @@
         </div>
       </div>
       <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
-        <fieldset ng-include="'views/quickview.html'" ng-show="sprites.current"></fieldset>
-        <fieldset ng-include="'views/settings.html'"></fieldset>
+        <fieldset data-ng-include="'views/quickview.html'" ng-show="sprites.current"></fieldset>
+        <fieldset data-ng-include="'views/settings.html'"></fieldset>
       </div>
-      <div ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
+      <div data-ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
         <div class="tabbable tabs-left">
           <ul class="nav nav-tabs">
             <li class="active" ><a href="#data" data-toggle="tab">Sprite Data</a></li>
@@ -66,9 +66,9 @@
             <li><a href="#live" data-toggle="tab">Live Preview</a></li>
           </ul>
           <div class="tab-content">
-            <div class="tab-pane active" id="data" ng-include="'views/datatable.html'"></div>
-            <div class="tab-pane" id="css" ng-include="'views/cssoutput.html'"></div>
-            <div class="tab-pane" id="live" ng-include="'views/live.html'"></div>
+            <div class="tab-pane active" id="data" data-ng-include="'views/datatable.html'"></div>
+            <div class="tab-pane" id="css" data-ng-include="'views/cssoutput.html'"></div>
+            <div class="tab-pane" id="live" data-ng-include="'views/live.html'"></div>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
               "js/model/sprite.js",
               "js/services/settings.js",
               "js/services/sprites.js",
-              "js/directives/css.js",
+              "js/directives/highlight.js",
               "js/directives/file.js",
               "js/directives/generator.js",
               "js/directives/grid.js",
