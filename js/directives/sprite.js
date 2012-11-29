@@ -28,7 +28,7 @@ app.directive('sprite', function(settings, sprites){
                                    settings.grid * settings.scale],
                             handles: "all" });
       }else{
-        element.draggable({drag: onDrag}).resizable({resize: onResize,  handles: "all"});
+        element.draggable({drag: onDrag, grid: null}).resizable({resize: onResize, grid:null, handles: "all"});
       }
     };
 
