@@ -4,7 +4,7 @@ app.factory('settingsStorage', function() {
   return {
     get: function() {
       var settings = JSON.parse(localStorage.getItem(STORAGE_ID));
-      //load defaults
+      //load default settings. TODO: There should be a way to reset this
       if(!settings){
         settings = {image: 'images/welcome.png',
                     imageName : 'welcome.png',

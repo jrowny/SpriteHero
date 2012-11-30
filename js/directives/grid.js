@@ -1,3 +1,4 @@
+//TODO: get rid of tight coupling by adding settings as attributes
 app.directive('grid', function(settings){
   "use strict";
   var link = function(scope, element, attrs) {

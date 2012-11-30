@@ -1,4 +1,5 @@
 /*global $:true alert:true*/
+//TODO: get rid of tight coupling to service by using attributes/&exp
 app.directive('fileWindow', function(settings, sprites){
   "use strict";
   var link = function(scope, element, attrs) {

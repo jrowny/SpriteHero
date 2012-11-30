@@ -1,3 +1,4 @@
+//TODO: remove tight coupling via attribtues
 app.directive('sprite', function(settings, sprites){
   "use strict";
   var link = function(scope, element, attrs, model) {

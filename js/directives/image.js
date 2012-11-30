@@ -1,3 +1,4 @@
+//TODO: get rid of tight coupling using attributes/events
 app.directive('imageSource', function(settings){
   "use strict";
   var link = function(scope, element, attrs) {

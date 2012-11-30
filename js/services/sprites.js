@@ -25,15 +25,13 @@ app.factory('spritesStorage', function() {
   };
 });
 
-
-
-//just an array
 app.service('sprites', function(spritesStorage, settings){
   "use strict";
   this.data = spritesStorage.get();
   this.index = spritesStorage.index();
   var self = this;
-  //compiles css code
+
+  //determines if the CSS output requires dimensions (i.e. pseudo hover states)
   var needsDimensions = function(sprite){
     //if we don't havea pseudo class, we need dimensions
     if(sprite.pseudo.length === 0) return true;
@@ -51,6 +49,7 @@ app.service('sprites', function(spritesStorage, settings){
     return true;
   };
   
+  //compiles css code TODO: perhaps add some formatting options
   this.compileCSS = function(includeBase){
     var output = "";
     var image = (settings.image.substring(0,14) === 'data:image/png') ? settings.imageName : settings.image;

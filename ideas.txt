@@ -1,5 +1,3 @@
 redo/undo support
 save persistant data to *.sh2
-export CSS file
-css base element options
 multi-select

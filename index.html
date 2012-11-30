@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>SpriteHero 2.0 - Beta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SpriteHero 2 is a web app to help you write">
+    <meta name="description" content="SpriteHero 2 is a web app to help you make CSS sprites without any headaches">
     <meta name="author" content="Jonathan Rowny">
     <!--(if target dist)>
     <link href="css/libs.css" rel="stylesheet" type="text/css">
@@ -54,10 +54,7 @@
           </div>   
         </div>
       </div>
-      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
-        <fieldset data-ng-include="'views/quickview.html'" ng-show="sprites.current"></fieldset>
-        <fieldset data-ng-include="'views/settings.html'"></fieldset>
-      </div>
+      
       <div data-ng-controller="DataCtrl" id="bottomArea" class="pane ui-layout-south">
         <div class="tabbable tabs-left">
           <ul class="nav nav-tabs">
@@ -71,6 +68,11 @@
             <div class="tab-pane" id="live" data-ng-include="'views/live.html'"></div>
           </div>
         </div>
+      </div>
+
+      <div id="settingsArea" class="pane ui-layout-east" ng-controller="SettingsCtrl">
+        <fieldset data-ng-include="'views/quickview.html'" ng-show="sprites.current"></fieldset>
+        <fieldset data-ng-include="'views/settings.html'"></fieldset>
       </div>
     </div> 
     <ng-include src="'views/modals.html'" id="modal-windows"></ng-include>     
