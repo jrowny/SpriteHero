@@ -5,6 +5,7 @@ function DataCtrl($scope, sprites, spritesStorage, settings){
   $scope.display = 'block';
   $scope.sprites = sprites;
   $scope.code = "";
+  $scope.settings = settings;
 
   var refreshCode = function(){
     $scope.code = sprites.compileCSS(settings.includeBase);
@@ -17,6 +18,7 @@ function DataCtrl($scope, sprites, spritesStorage, settings){
                     {label:"Active", value:"active"},
                     {label:"Visited", value:"visited"},
                     {label:"Focus", value:"focus"}];
+
   $scope.trash = function(sprite){
     sprites.data.splice(sprites.data.indexOf(sprite), 1);
   };
@@ -32,6 +34,14 @@ function DataCtrl($scope, sprites, spritesStorage, settings){
     sprites.current = sprites.data[sprites.data.length-1];
     sprites.index++;
   };
+
+  $scope.liveStyle = function(sprite){
+    return {display:  $scope.display,
+            float: $scope.float,
+            width:  sprite.width + "px",
+            height:  sprite.height + "px",
+            background: "url('" + settings.image + "') " + (sprite.x*-1) + "px " + (sprite.y*-1) + "px no-repeat"}
+  }
 
   $scope.$watch('sprites.data', function() {
     spritesStorage.put(sprites.data);

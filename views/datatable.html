@@ -1,32 +1,34 @@
 
-              <table class="table table-striped table-hover">
-                <tr>
-                  <th></th>
-                  <th>Type</th>
-                  <th>Name</th>
-                  <th>Pseudo</th>
-                  <th>Width</th>
-                  <th>Height</th>
-                  <th>X</th>
-                  <th>Y</th>
-                </tr>
-                <tr ng-repeat="sprite in sprites.data" >
-                  <!--TODO: duplicate button would be nice for creating many similar layers -->
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn" ui-jq="tooltip" title="Select" 
-                         ng-class="{true: 'btn-info', false: ''}[sprite == sprites.current]" 
-                         ng-click="setCurrent(sprite)">
-                         <i ng-class="{true: 'icon-star', false: 'icon-star-empty'}[sprite == sprites.current]"></i></a>
-                      <a class="btn" ui-jq="tooltip" title="Duplicate" ng-click="duplicate(sprite)" ng-click="trash(sprite)"><i class="icon-plus"></i></a>
-                      <a class="btn" ui-jq="tooltip" title="Delete" ng-click="trash(sprite)"><i class="icon-trash"></i></a>
-                    </div></td>
-                  <td><select ng-model="sprite.isClass" class="input-small" ng-options="t.value as t.label for t in types"/></td>
-                  <td><input type="text" ng-model="sprite.name" class="input-medium"></td>
-                  <td><select ng-model="sprite.pseudo" class="input-small" ng-options="p.value as p.label for p in pseudos"/></td>
-                  <td><input type="number" ng-model="sprite.width" class="input-mini"/></td>
-                  <td><input type="number" ng-model="sprite.height" class="input-mini"/></td>
-                  <td><input type="number" ng-model="sprite.x" class="input-mini"/></td>
-                  <td><input type="number" ng-model="sprite.y" class="input-mini"/></td>
-                </tr>
-              </table>
+<table class="table table-striped table-hover">
+  <tr>
+    <th></th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Pseudo</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th>X</th>
+    <th>Y</th>
+  </tr>
+  <tr ng-repeat="sprite in sprites.data" >
+    <!--TODO: duplicate button would be nice for creating many similar layers -->
+    <td>
+      <div class="btn-group">
+        <a class="btn" ui-jq="tooltip" title="Select" 
+           ng-class="{true: 'btn-info', false: ''}[sprite == sprites.current]" 
+           ng-click="setCurrent(sprite)">
+           <i ng-class="{true: 'icon-star', false: 'icon-star-empty'}[sprite == sprites.current]"></i></a>
+        <a class="btn" ui-jq="tooltip" title="Duplicate" ng-click="duplicate(sprite)" ng-click="trash(sprite)"><i class="icon-plus"></i></a>
+        <a class="btn" ui-jq="tooltip" title="Delete" ng-click="trash(sprite)"><i class="icon-trash"></i></a>
+      </div></td>
+    <td><select ng-model="sprite.isClass" class="input-small" ng-options="t.value as t.label for t in types"/></td>
+    <td><input type="text" ng-model="sprite.name" class="input-medium"></td>
+    <td><select ng-model="sprite.pseudo" class="input-small" ng-options="p.value as p.label for p in pseudos"/></td>
+    <td><input type="number" ng-model="sprite.width" class="input-mini"/></td>
+    <td><input type="number" ng-model="sprite.height" class="input-mini"/></td>
+    <td><input type="number" ng-model="sprite.x" class="input-mini"/></td>
+    <td><input type="number" ng-model="sprite.y" class="input-mini"/></td>
+  </tr>
+</table>
+<a href="{{settings.image}}" target="_blank">{{settings.imageName}}</a>
+{{settings.width}}px by {{settings.height}}px

@@ -77,3 +77,5 @@ pre code{background:transparent;}
                width:10%;
                height:10%;
                text-align: center;}
+
+.twitter-share-button, .g-plusone {display:inline-block; vertical-align: middle;padding:3px 8px;}

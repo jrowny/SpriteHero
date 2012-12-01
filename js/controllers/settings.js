@@ -7,6 +7,16 @@ function SettingsCtrl($scope, settings, settingsStorage, sprites) {
     settings.gridOpacity = opacity;
   };
 
+  $scope.quickViewStyle = function(){
+    if(sprites.current){
+      return {width: sprites.current.width + "px",
+              height: sprites.current.height + "px",
+              background: "url('" + settings.image + "') " + (sprites.current.x*-1) + "px " + (sprites.current.y*-1) + "px no-repeat"}
+    }else{
+      return {};
+    }
+  };
+
   $scope.$watch('settings', function() {
     settingsStorage.put(settings);
   }, true);

@@ -52,7 +52,7 @@ app.service('sprites', function(spritesStorage, settings){
   //compiles css code TODO: perhaps add some formatting options
   this.compileCSS = function(includeBase){
     var output = "";
-    var image = (settings.image.substring(0,14) === 'data:image/png') ? settings.imageName : settings.image;
+    var image = (settings.image.substring(0,11) === 'data:image/') ? settings.imageName : settings.image;
       if(includeBase !== undefined && includeBase){
       output += settings.baseElement + "{\n" +
                 "  background: url('" + image + "') no-repeat;\n" +
