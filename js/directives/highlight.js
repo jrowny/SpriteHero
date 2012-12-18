@@ -1,5 +1,4 @@
 /*global hljs:true jQuery:true angular:true */
-//TODO make this an element directive which can have type specififed
 app.directive('highlight', function(){
   "use strict";
   var link = function(scope, element, attrs) {
