@@ -75,18 +75,17 @@
     <div ng-include src="'views/modals.html'" id="modal-windows"></div>     
     <!--(if target dist)>
     <script>
-      head.js("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",
-              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js",
+      head.js("lib/jquery-1.8.3.min.js",
+              "lib/angular.1.0.3.min.js",
               "js/libs.js",
-              "js/sh2.js",
-              "//apis.google.com/js/plusone.js");
+              "js/sh2.js");
       head.ready(function(){$('.loading').remove();});
     </script>
     <!(endif)-->
     <!--(if target dev)><!-->
     <script>
-      head.js("//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",              
-              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js",
+      head.js("lib/jquery-1.8.3.min.js",              
+              "lib/angular.1.0.3.min.js",
               "lib/jquery-ui-1.9.1.custom.min.js",
               "lib/bootstrap/js/bootstrap.min.js",
               "lib/angular-ui.min.js",
@@ -106,14 +105,11 @@
               "js/controllers/app.js",
               "js/controllers/data.js",
               "js/controllers/image.js",
-              "js/controllers/settings.js",
-              "//apis.google.com/js/plusone.js");
+              "js/controllers/settings.js");
       head.ready(function(){
         $('.loading').remove();
       });
     </script>
     <!--<!(endif)-->
-
-
     </body>
 </html>

@@ -7,8 +7,9 @@ function AppCtrl($scope, settings, sprites){
   $scope.settings = settings;
 
   $scope.exportCSS = function(){
-    var dataURI = "data:text/css," + encodeURIComponent(sprites.compileCSS(settings.includeBase));
-    window.open(dataURI, '_blank');
+    //var dataURI = "data:text/css," + encodeURIComponent(sprites.compileCSS(settings.includeBase));
+    $('body').trigger('getCSS', [sprites.compileCSS(settings.includeBase)]);
+    //window.open(dataURI, '_blank');
   };
  
   $scope.openUrlModal = function(){

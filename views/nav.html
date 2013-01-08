@@ -8,7 +8,8 @@
               <li class="openFromImage"><a tabindex="-1" file-window>Open from Image</a></li>
               <li><a tabindex="-1" ng-click="openUrlModal()">Open from URL</a></li>
               <li class="divider"></li>
-              <li><a tabindex="-1" ng-click="exportCSS()">Export CSS</a></li>
+              <li><a tabindex="-1" ng-click="exportCSS()">Export CSS to Brackets</a></li>
+              <!--<li><a tabindex="-1" ng-click="clipboardCSS()">Copy CSS to clipboard</a></li>-->
             </ul>
         </li>
         <li><a ng-click="openHelpModal()">About</a></li>
@@ -19,13 +20,6 @@
         <label class="btn zoom" disabled="disabled">{{settings.scale * 100}}%</label>
         <button class="btn" ng-disabled="settings.scale == 1" ng-click="settings.scale = 1">Reset</button>
       </div>  
- <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.spritehero.com" data-text="Easy CSS Sprites with SpriteHero" data-size="large" data-hashtags="spritehero">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-<!-- Place this tag where you want the +1 button to render. -->
-<div class="g-plusone" data-href="http://www.spritehero.com"></div>
-
-<!-- Place this tag after the last +1 button tag. -->
 
     </div><!--/.nav-collapse -->
   </div>
